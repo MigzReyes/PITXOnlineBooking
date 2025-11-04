@@ -13,9 +13,15 @@
   --green: #02B464;
   --footer-grey: #414042;
 
-  --regular: 500;
+  --lightweight: 350;
+  --regular: 400;
   --semibold: 600;
   --bold: 700;
+
+  --radius: 5px;
+  --box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+
+  --text-space: 1.5px
 }
 
 * {
@@ -32,4 +38,308 @@ html {
   font-size: 16px;
   font-family: "Open Sans", sans-serif;
   line-height: 1.5;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* NAVBAR */
+header {
+  width: 100vw;
+}
+
+nav {
+  padding: 20px;
+}
+
+.pitxLogo_con {
+  width: fit-content;
+  padding: 15px 35px 15px 0px;
+  border-right: 1px solid var(--main-color-red);
+}
+
+.pitxLogo {
+  width: 350px;
+}
+
+
+/* MAIN */
+main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+}
+
+section {
+  height: 100vh;
+  width: 100%;
+}
+
+/* HERO SECTION */
+.hero_sec {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+#bg_video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  object-fit: cover;
+}
+
+.opacity_hero {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: var(--black);
+  opacity: 0.65;
+}
+
+.hero_introductory {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  color: var(--white);
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  top: 40%;
+  padding: 0px 40px;
+}
+
+.hero_introductory h1 {
+  text-align: center;
+}
+
+.hero_introductory p {
+  font-weight: var(--lightweight);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.hero_intro_bot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn_con button {
+  cursor: pointer;
+  background: var(--main-color-red);
+  border-radius: var(--radius);
+  padding: 8px 19px;
+  color: var(--white);
+  outline: none;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: var(--semibold);
+}
+
+/* LIVE BUS SCHEDULE */
+.live_bus_sched_sec {
+  height: 100vh;
+  padding: 40px;
+}
+
+.live_bus_sched_con {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  height: 100%;
+}
+
+.live_bus_sched_con_top {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.live_bus_sched_con_top h1 {
+  font-size: 1.8rem;
+}
+
+.live_bus_schedule {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--box-shadow);
+  gap: 10px;
+}
+
+.live_bus_schedule_top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.live_bus_schedule_top h1 {
+  font-size: 1.5rem;
+}
+
+.live_bus_schedule_top_left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+
+.live_bus_schedule_top_left h1 {
+  color: var(--main-color-red);
+}
+
+.bus_icon_live_bus_sched_con {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5px;
+}
+
+.bus_icon_live_bus_sched {
+  width: 45px;
+}
+
+.bus_icon_live_bus_sched img {
+  border-radius: var(--radius);
+}
+
+.live_bus_schedule_top_right {
+  display: flex;
+  align-items: center;
+}
+
+.live_bus_schedule_date_con {
+  display: flex;
+  gap: 10px;
+  padding: 0px 10px;
+  border-bottom: 1px solid var(--main-color-red);
+}
+
+.month_day {
+  display: flex;
+  gap: 5px;
+}
+
+.live_bus_schedule table {
+  width: 100%;
+  border-spacing: 10px;
+}
+
+.live_bus_schedule th {
+  border-bottom: 1px solid var(--main-color-red);
+  padding: 0px 25px;
+  font-weight: var(--semibold);
+  font-size: 1.2rem;
+}
+
+.live_bus_schedule tr {
+  border-bottom: 1px solid green;
+}
+
+.live_bus_schedule td {
+  font-weight: var(--bold);
+  text-align: center;
+  font-size: 1.2rem;
+  border: none;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.th {
+  padding: 0px 20px;
+  border-bottom: 1px solid var(--main-color-red);
+  font-weight: var(--semibold);
+  text-align: center;
+}
+
+.tbody {
+  display: flex;
+  gap: 25px;
+}
+
+.tc {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.td {
+  text-align: center;
+  font-weight: var(--bold);
+}
+
+.status {
+  text-align: start !important;
+  color: #007CFF;
+}
+
+.boarding {
+  color: var(--light-blue);
+}
+
+.cancelled {
+  color: var(--main-color-red);
+}
+
+
+
+/* FOOTER */
+footer {
+  width: 100vw;
+  background: var(--footer-grey);
+  margin-top: auto;
+  color: white;
+}
+
+.footer_con {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 40px;
+}
+
+.pitxLogo_footer {
+  width: 200px;
+  align-self: center;
+}
+
+.footer_para_con {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-evenly;
+}
+
+.footer_para_con p {
+  font-size: 0.9rem;
+  font-weight: var(--regular);
 }

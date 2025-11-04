@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PITXOnlineBooking</title>
+    <title>@ViewData["Title"] - PITX</title>
 
     
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -11,19 +11,34 @@
 <body>
     <!-- NAVBAR -->
     <header>
+        <nav>
+            <div class="pitxLogo_con">
+                <div class="pitxLogo">
+                    <img src="~/img/pitxLogo.png" alt="pitxLogo">
+                </div>
+            </div>
+        </nav>
     </header>
 
     <!-- MAIN -->
-    <main role="main">
+    <main>
         @RenderBody()
     </main>
 
     <!-- FOOTER -->
     <footer>
+        <div class="footer_con">
+            <div class="pitxLogo_footer">
+                <img src="~/img/pitxLogo2.png" alt="pitxLogoFooter">
+            </div>
+
+            <div class="footer_para_con">
+                <p>Paranaque Integrated Terminal Exchange, #1 Kennedy Rd., Tambo, Paranaque City</p>
+
+                <p>© Company 2025 All rights reserved.</p>
+            </div>
+        </div>
     </footer>
-
-
-
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

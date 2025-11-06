@@ -83,6 +83,14 @@ input {
   width: 100%;
 }
 
+.activeBtn {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.inactiveBtn {
+  display: none !important;
+}
 /* HOME MAIN ***********************************************************************************************************************/
 /* NAVBAR */
 header {
@@ -685,6 +693,7 @@ section {
   overflow-y: auto;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -1387,6 +1396,125 @@ input[type="radio"] {
   accent-color: var(--main-color-red);
 }
 
+/* RECEIPT */
+.receipt {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 10px;
+}
+
+.receipt_top_con {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.receipt_top_con p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.redText {
+  color: var(--main-color-red);
+  font-weight: var(--bold);
+}
+
+.blueText {
+  color: var(--main-color-blue);
+  font-weight: var(--bold);
+}
+
+.receipt_top_con .redLine {
+  margin: 0;
+  border-right: 1px solid var(--main-color-red);
+}
+
+.receipt_main_con {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.receipt_main {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.receipt_main_con_top {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.receipt_main_con_top p {
+  font-weight: var(--regular);
+  font-size: 0.9rem;
+}
+
+.receipt_main_con_top span {
+  font-weight: var(--semibold) !important;
+}
+
+.receipt_head {
+  font-weight: var(--bold) !important;
+  font-size: 1rem !important;
+}
+
+.receipt_information_con {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.receipt_information_con div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.receipt_info {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: start !important;
+  align-items: start;
+  width: 100%;
+}
+
+.receipt_info p {
+  font-weight: var(--semibold);
+  font-size: 0.95rem;
+}
+
+.info_head {
+  color: var(--grey) !important;
+  font-size: 0.9rem !important;
+  font-weight: var(--regular) !important; 
+}
+
+.qr_con {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  gap: 15px;
+}
+
+.qr_con p {
+  font-size: 0.95rem;
+}
+
+.qrCode {
+  display: flex;
+  align-self: center;
+  width: 200px;
+}
+
+.payBtn {
+  background: var(--main-color-red) !important;
+}
+
 /* FOOTER ***********************************************************************************************************************/
 footer {
   width: 100vw;
@@ -1419,3 +1547,68 @@ footer {
   font-size: 0.9rem;
   font-weight: var(--regular);
 }
+
+
+
+/* POPUP ***********************************************************************************************************************/
+.show {
+  display: flex !important;
+}
+
+.popup_con {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 20px ;
+}
+
+.payment_success {
+  width: fit-content;
+  padding: 15px 15px;
+  position: relative;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  background: white;
+  border-radius: var(--radius);
+}
+
+.payment_success p {
+  font-weight: var(--semibold);
+}
+
+.payment_success_heading {
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+.payment_success_heading .redLine {
+  margin: 0;
+  justify-self: center;
+  width: 40%;
+  border-bottom: 1px solid var(--main-color-red);
+}
+
+.close_pay_success {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 10px;
+  cursor: pointer;
+}
+
+.safeTripMotto {
+  font-weight: var(--regular) !important;
+  color: var(--grey) !important;
+  font-size: 0.9rem !important;
+}
+

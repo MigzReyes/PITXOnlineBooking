@@ -56,8 +56,9 @@
                     </div>
 
                     <div class="booking_btn_con">
-                        <button onclick="location.href=`@Url.Action((string)@ViewBag.Page, "Home")`">Next</button>
-                        <button onclick="location.href=`@Url.Action("GCashMain", "GCash")`">Pay ₱1.979</button>
+                        <button id="nextBtn" onclick="location.href=`@Url.Action((string)@ViewBag.Page, "Home")`">Next</button>
+                        <button id="payBtn" class="payBtn inactiveBtn" onclick="location.href=`@Url.Action("GCashMain", "GCash")`">Pay ₱1.979</button>
+                        <button id="homeBtn" class="homeBtn inactiveBtn" onclick="location.href=`@Url.Action("Main", "Home")`">Back to home</button>
                     </div>
                 </div>
             </div>
@@ -77,6 +78,27 @@
             </div>
         </div>
     </footer>
+
+    <!-- POP UP -->
+    <div class="popup_con show" id="popUpCon">
+
+        <!-- SUCCESS PAYMENT -->
+        <div class="payment_success">
+            <img id="closeBtn" class="close_pay_success" src="~/icons/close.svg" alt="close">
+            <p>Payment Succesful</p>
+            <div class="payment_success_heading">
+                <p><span class="redText">Thank you, </span><span class="blueText">friend!</span></p>
+                <div class="redLine"></div>
+            </div>
+            <p>Your payment of ₱1,979.00 has been successfully received</p>
+            <p class="safeTripMotto">Have a safe trip by <span class="blueText">PI</span><span class="redText">TX</span></p>
+        </div>
+
+
+        <!-- RECEIPT -->
+    </div>
+
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

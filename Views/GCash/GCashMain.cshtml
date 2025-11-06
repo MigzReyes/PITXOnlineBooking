@@ -171,7 +171,7 @@
             <p>Please review to ensure that the details are correct before you proceed</p>
             <div class="btn_con">
                 <div class="main_btn">
-                    <form asp-controller="GCash" asp-action="GetAvailBalance" method="post" id="payAmountForm">
+                    <form id="payAmountForm">
                         <button type="submit" id="btn4"> <!--data-url="@*Url.Action("Main", "Home")*@"-->
                             PAY PHP <span>@*@*Model.GCash.Amount*@.00</span>
                         </button>
@@ -244,8 +244,8 @@
         <div class="pay_suc_bot">
             <div class="btn_con">
                 <div class="main_btn">
-                    <button id="btn5" onclick="location.href=`@Url.Action("Main", "Home")`">
-                        Back to OneSTI
+                    <button id="btn5" onclick="location.href=`@Url.Action("Receipt", "Home")`">
+                        Back to PITX
                     </button>
 
                     <div class="button_opacity">

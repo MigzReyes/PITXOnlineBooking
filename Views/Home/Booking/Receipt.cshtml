@@ -1,0 +1,85 @@
+@{
+    ViewData["Title"] = "Receipt";
+}
+
+<div class="receipt">
+    <div class="receipt_top_con">
+        <p>Thank you for choosing <span class="blueText">PI</span><span class="redText">TX</span>, Ride Safe <span class="redText">Friends!</span></p>
+        <div class="redLine"></div>
+    </div>
+
+    <div class="receipt_main_con">
+        <div class="receipt_main">
+            <div class="receipt_main_con_top">
+                <p class="receipt_head">Information</p>
+                <p><span>Ticket NO./OR :</span> ERJAL181100000010</p>
+            </div>
+            
+            <div class="receipt_information_con">
+                <div>
+                    <div class="receipt_info">
+                        <p class="info_head">Departure</p>
+                        <p>Paranaque Integrated Terminal Exchange, Manila</p>
+                    </div>
+
+                    <div class="receipt_info">
+                        <p class="info_head">Destination</p>
+                        <p>Legazpi, Grand Central Terminal</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="receipt_info">
+                        <p class="info_head">Departure Date</p>
+                        <p>Mon, Nov 3, 2025, 06:00 am</p>
+                    </div>
+
+                    <div class="receipt_info">
+                        <p class="info_head">Trip No#</p>
+                        <p>EAMD039</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="receipt_info">
+                        <p class="info_head">Gate</p>
+                        <p>G07</p>
+                    </div>
+
+                    <div class="receipt_info">
+                        <p class="info_head">Bay</p>
+                        <p>D23</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="receipt_info">
+                        <p class="info_head">Date Booked</p>
+                        <p>11/2/2025 12:45 pm</p>
+                    </div>
+
+                    <div class="receipt_info">
+                        <p class="info_head">Fare</p>
+                        <p>₱1,979.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="qr_con">
+            <p><span class="redText">Note:</span> Screenshot this before your trip and show your QR code to the conductor when boarding the bus</p>
+            <div class="qrCode">
+                <img src="~/icons/qrCodeSample.svg" alt="qrCode">
+            </div>
+        </div>
+    </div>    
+</div>
+
+
+
+<script>
+    console.log("this is payment page");
+
+    //onst bookingMainCon = document.querySelector(".booking_main_con");
+    //bookingMainCon.classList.toggle('inactive');
+</script>

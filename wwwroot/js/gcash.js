@@ -50,6 +50,14 @@ btn3.addEventListener('click', () => {
     paySucPop.classList.remove("active");
 });
 
+btn4.addEventListener('click', () => {
+    loginPop.classList.remove("active");
+    otpPop.classList.remove("active");
+    mpinPop.classList.remove("active");
+    payDetPop.classList.remove("active");
+    paySucPop.classList.toggle("active");
+});
+
 btn5.addEventListener('click', () => {
     loginPop.classList.remove("inactive");
     otpPop.classList.remove("active");

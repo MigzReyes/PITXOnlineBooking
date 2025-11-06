@@ -515,7 +515,7 @@ section {
 
 .booking_bus_list {
   display: flex;
-  padding: 10px;
+  padding: 15px;
   background: var(--white);
   border-radius: var(--radius);
   gap: 20px;
@@ -618,6 +618,312 @@ section {
   padding: 3px 10px;
 }
 
+
+/*  BOOKING ***********************************************************************************************************************/
+.booking_main {
+  background-image: url('/img/background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.booking_proc {
+  padding: 0px 20px;
+}
+
+.booking_proc_modal_con {
+  background: var(--white);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+}
+
+.booking_top {
+  border-bottom: 1px solid var(--main-color-red);
+  padding: 10px 20px; 
+  display: flex;
+  gap: 15px;
+}
+
+.booking_top .redLine {
+  border-right: 1px solid var(--main-color-red);
+  margin: 0;
+}
+
+.booking_top p {
+  font-weight: var(--semibold);
+  font-size: 1.3rem;
+  padding: 5px;
+}
+
+.booking_top span {
+  font-size: 1.2rem;
+}
+
+.booking_main_con {
+  padding: 20px;
+}
+
+/* ITINERARY*/
+.itinerary {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.how_many_pass_con {
+  display: flex;
+  flex-direction: column;
+}
+
+.how_many_pass_con p {
+  font-weight: var(--semibold);
+  font-size: 0.9rem;
+}
+
+.passenger_input {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: var(--border);
+  padding: 5px 10px;
+  border-radius: var(--radius);
+}
+
+.pass_icon {
+  display: flex;
+  align-items: center;
+  width: 15px;
+}
+
+.passenger_input p {
+  font-weight: var(--regular);
+  font-size: 0.95rem;
+}
+
+.itinerary_trip_info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0px 5px 15px;
+  border-bottom: 1px solid var(--main-color-red);
+}
+
+.itinerary_trip_info_top {
+  display: flex;
+  flex-direction: column;
+}
+
+.itinerary_trip_info p {
+  font-weight: var(--semibold);
+  font-size: 0.95rem;
+}
+
+.itinerary_trip_info_date {
+  display: flex;
+  flex-direction: column;
+  padding-left: 25px;
+  gap: 5px;
+}
+
+.itinerary_trip_info_date p {
+  font-size: 0.9rem;
+}
+
+.itinerary_trip_departure {
+  display: flex;
+  gap: 10px;
+}
+
+.itinerary_trip_time {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 10px;
+}
+
+.itinerary_trip_time p {
+  font-weight: var(--regular);
+  font-size: 0.9em;
+}
+
+.itinerary_bus_icon {
+  width: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.itinerary_bus_icon img {
+  border-radius: var(--radius);
+}
+
+.itinerary_trip_destination {
+  display: flex;
+  gap: 10px;
+}
+
+.itinerary_bus_info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* CHANGE THIS MAKE GAP AND PADDING CHANGE IN MEDIA QUERY */
+
+.itinerary_bus_img_con {
+  display: flex;
+  gap: 100px;
+  padding: 0px 50px;
+}
+
+.bus_logo_con {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.itinerary_bus_logo {
+  width: 45px;
+}
+
+.bus_logo_con p {
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.itinerary_bus_pic_con {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 5px;
+}
+
+.itinerary_bus_pic_con .busPic {
+  width: 135px;
+}
+
+.itinerary_bus_provides_con {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 5px 10px;
+  border-bottom: 1px solid var(--main-color-red);
+  gap: 2px;
+}
+
+.itinerary_bus_provides_con p {
+  font-weight: var(--semibold);
+  font-size: 0.95rem;
+}
+
+.bus_provides_con {
+  display: flex;
+  align-items: start;
+  gap: 15px;
+  padding-left: 10px;
+}
+
+.bus_provides_con div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bus_provides_con p {
+  font-size: 0.75rem;
+}
+
+.aircon_icon {
+  width: 23px;
+}
+
+.tv_icon {
+  width: 23px;
+}
+
+.restroom_icon {
+  width: 23px;
+}
+
+.itinerary_important_rem_con {
+  display: flex;
+  flex-direction: column;
+}
+
+.itinerary_important_rem_con p {
+  font-size: 0.9rem;
+}
+
+.itinerary_important_rem_con span {
+  font-weight: var(--semibold);
+}
+
+.important_rem_con {
+  padding-left: 15px;
+}
+
+
+.booking_bot {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px 20px;
+  border-top:  1px solid var(--main-color-red);
+}
+
+.total_con {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.total_con div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.total_con p {
+  font-weight: var(--semibold);
+}
+
+.total span {
+  font-size: 0.95rem;
+}
+
+.subtotal {
+  display: flex;
+  flex-direction: column;
+}
+
+.subtotal p {
+  font-size: 0.9rem;
+  font-weight: var(--regular);
+}
+
+.subtotal div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking_btn_con {
+  display: flex;
+  justify-content: center;
+  padding: 0px 130px;
+}
+
+.booking_btn_con button {
+  background: var(--main-color-blue);
+  font-size: 1.05rem;
+  width: 100%;
+  padding: 5px 0px;
+}
 
 /* FOOTER ***********************************************************************************************************************/
 footer {

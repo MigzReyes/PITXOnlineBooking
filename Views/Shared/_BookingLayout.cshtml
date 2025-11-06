@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PITX</title>
+
+    
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- NAVBAR -->
+    <header>
+        <nav>
+            <div class="pitxLogo_con">
+                <div class="pitxLogo">
+                    <img src="~/img/pitxLogo.png" alt="pitxLogo">
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main class="booking_main">
+        <div class="booking_proc">
+            <div class="booking_proc_modal_con">
+                <div class="booking_top">
+                    <p>Itinerary</p>
+                    <div class="redLine"></div>
+                    <p><span>Provincial Bus</span></p>
+                </div>
+
+                        
+                <div class="booking_main_con">
+                    @RenderBody()
+                </div>
+
+                <div class="booking_bot">
+                    <div class="total_con">
+                        <div class="total">
+                            <p><span>Total</span></p>
+                            <p>₱1,979</p>
+                        </div>
+
+                        <div class="subtotal">    
+                            <div class="insurance">
+                                <p>Insurance</p>
+                                <p>₱148</p>
+                            </div>
+
+                            <div class="taxes_and_fees">
+                                <p>Taxes and fees</p>
+                                <p>₱6</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="booking_btn_con">
+                        <button onclick="location.href=`@Url.Action("Passengers", "Home")`">Next</button>
+                    </div>
+                </div>
+            </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer_con">
+            <div class="pitxLogo_footer">
+                <img src="~/img/pitxLogo2.png" alt="pitxLogoFooter">
+            </div>
+
+            <div class="footer_para_con">
+                <p>Paranaque Integrated Terminal Exchange, #1 Kennedy Rd., Tambo, Paranaque City</p>
+
+                <p>© Company 2025 All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

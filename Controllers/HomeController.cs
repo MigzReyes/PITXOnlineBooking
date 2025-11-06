@@ -22,4 +22,14 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    public IActionResult Itinerary()
+    {
+        return View("Booking/Itinerary");
+    }
+
+    public IActionResult Passengers()
+    {
+        return View("Booking/Passengers");
+    }
 }

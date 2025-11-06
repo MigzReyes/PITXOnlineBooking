@@ -42,5 +42,19 @@ public class HomeController : Controller
         ViewBag.Title = "Confirmation";
         ViewBag.Page = "Payment";
         return View("Booking/Confirmation");
+
+    }
+
+    public IActionResult Payment()
+    {
+        ViewBag.Title = "Payment";
+        ViewBag.Page = "Receipt";
+        return View("Booking/Payment");
+    }
+
+    public IActionResult Receipt()
+    {
+        ViewBag.Title = "Receipt";
+        return View("Booking/Receipt");
     }
 }

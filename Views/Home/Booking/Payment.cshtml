@@ -1,0 +1,91 @@
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<div class="payment">
+    <div class="booking_summary_con">
+        <div class="booking_timer_con">
+            <p>Please compute the booking within <span>00:30:00</span></p>
+        </div>
+
+        <div class="trip_summary_con">
+            <p>Trip Summary</p>
+            <div class="trip_summary_info">
+                <div class="trip_summary_departure">
+                    <p>Departure date</p>
+                    <div class="trip_summary_departure_info">
+                        <p><span>Mon, Nov, 2025, 06:00 am —</span> Paranaque Integrated Terminal Exchange, Manila - Legazpi, Grand Central Terminal</p>
+                    </div>
+                </div>
+
+                <div class="trip_summary_passenger">
+                    <p>Passengers information</p>
+                    <div class="passenger_list">
+                        <ul>
+                            <li>John Migz Reyes, child</li>
+                            <li>Miguel Reyes, adult</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="payment_con">
+        <p>Payment</p>
+        <div class="payment_method_con">
+            <form action="">
+                <div class="gcash" id="gcash">
+                    
+                    <input class="radioBtn" id="gcashBtn" type="radio" name="payment" value="gcash" checked>
+
+                    <div class="gcash_info_con">
+                        <div class="gcash_logo_con">
+                            <p>GCash</p>
+                            <div class="gcash_logo">
+                                <img src="~/img/gcashLogo.png" alt="gcashLogo">
+                            </div>
+                        </div>
+
+                        <p class="pay_rem">Please note that payment must be completed within the next 5 minutes. Service Fee ₱60</p>            
+                    </div>
+                </div>
+
+                <div class="maya" id="maya">
+                    
+                    <input class="radioBtn" id="mayaBtn" type="radio" name="payment" value="maya">
+
+                    <div class="maya_info_con">
+                        <div class="maya_logo_con">
+                            <p>PayMaya</p>
+                            <div class="maya_logo">
+                                <img src="~/img/mayaLogo.png" alt="mayaLogo">
+                            </div>
+                        </div>
+
+                        <p class="pay_rem">Please note that payment must be completed within the next 5 minutes. Service Fee ₱60</p>            
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    console.log("this is payment page");
+
+    const bookingMainCon = document.querySelector(".booking_main_con");
+    bookingMainCon.classList.toggle('inactive');
+
+    // PAYMENT METHOD RADIO BUTTON
+    const gcash = document.getElementById("gcash");
+    const maya = document.getElementById("maya");
+
+    gcash.addEventListener("click", () => {
+        document.getElementById("gcashBtn").click();
+    });
+
+    maya.addEventListener("click", () => {
+        document.getElementById("mayaBtn").click();
+    });
+</script>

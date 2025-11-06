@@ -1251,6 +1251,11 @@ section {
 }
 
 /* CONFIRMATION */
+.confirmation {
+  display: flex;
+  flex-direction: column;
+}
+
 .passenger_list {
   margin-left: 15px;
 }
@@ -1285,6 +1290,102 @@ section {
 }
 
 
+/* PAYMENT */
+.payment {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.payment_con {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.payment_con p {
+  font-weight: var(--bold);
+}
+
+.payment_method_con {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 10px;
+}
+
+.gcash {
+  display: flex;
+  gap: 5px;
+}
+
+.gcash_info_con {
+  display: flex;
+  flex-direction: column;
+}
+
+.gcash_info_con p {
+  font-size: 1rem;
+  font-weight: var(--semibold);
+}
+
+.gcash_logo_con {
+  display: flex;
+  gap: 5px;
+}
+
+.gcash_logo {
+  display: flex;
+  align-items: center;
+  width: 80px;
+}
+
+.maya {
+  display: flex;
+  gap: 5px;
+}
+
+.maay_info_con {
+  display: flex; 
+  flex-direction: column;
+}
+
+.maya_info_con p {
+  font-size: 0.9rem;
+  font-weight: var(--regular);
+  color: var(--grey);
+}
+
+.maya_logo_con {
+  display: flex;
+  gap: 5px;
+}
+
+.maya_logo_con p {
+  font-weight: var(--semibold);
+  font-size: 1rem;
+  color: var(--black);
+}
+
+.maya_logo {
+  display: flex;
+  align-items: end;
+  width: 70px;
+}
+
+.pay_rem {
+  font-size: 0.8rem !important;
+  font-weight: var(--regular) !important;
+  color: var(--grey);
+}
+
+.radioBtn {
+  width: 20px;
+}
+
+input[type="radio"] {
+  accent-color: var(--main-color-red);
+}
 
 /* FOOTER ***********************************************************************************************************************/
 footer {

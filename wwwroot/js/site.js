@@ -35,11 +35,35 @@ if (page.textContent.toLowerCase() === "payment") {
 // POP UP
 const popUpCon = document.getElementById("popUpCon");
 const closeBtn = document.getElementById("closeBtn");
+let receiptPopUp;
+let successPayPopUp;
 
+    // QR
+    const qrCode = document.getElementById("qrCode");
+
+    qrCode.addEventListener("click", () => {
+        receiptPopUp = document.getElementById("receiptPopUp");
+
+        popUpCon.classList.toggle("show");
+        receiptPopUp.classList.toggle("show");
+    });
+
+    // SUCCESS PAYMENT
+    if (page.textContent.toLowerCase() === "receipt") {
+        popUpCon.classList.toggle("show");
+        successPayPopUp = document.getElementById("successPayPopUp");
+
+        successPayPopUp.classList.toggle("show");
+    }
+
+
+// CLOSE FUNCTION
 closeBtn.addEventListener("click", () => {
     popUpCon.classList.remove("show");
+    receiptPopUp.classList.remove("show");
 });
 
 popUpCon.addEventListener("click", () => {
     popUpCon.classList.remove("show");
+    receiptPopUp.classList.remove("show");
 });

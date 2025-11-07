@@ -80,10 +80,10 @@
     </footer>
 
     <!-- POP UP -->
-    <div class="popup_con show" id="popUpCon">
+    <div class="popup_con" id="popUpCon">
 
         <!-- SUCCESS PAYMENT -->
-        <div class="payment_success">
+        <div class="payment_success" id="successPayPopUp">
             <img id="closeBtn" class="close_pay_success" src="~/icons/close.svg" alt="close">
             <p>Payment Succesful</p>
             <div class="payment_success_heading">
@@ -96,6 +96,101 @@
 
 
         <!-- RECEIPT -->
+        <div class="receipt_popUp" id="receiptPopUp">
+            <div class="receipt_popUp_top">
+                <img id="closeBtn" class="close_receipt_popUp" src="~/icons/closeWhite.svg" alt="close">
+                <p>Passenger Receipt</p>
+            </div>
+    
+            <div class="receipt_popUp_con">
+                <div class="receipt_popUp_main">
+                    <div class="receipt_popUp_main_top">
+                        <p><span>Ticket NO./OR</span> : ERJAL181100000010</p>
+                        <div class="receipt_popUp_passenger_info">
+                            <p>Passengers Information</p>
+                            <ul>
+                                <li>John Migz Reyes, child</li>
+                                <li>Miguel Reyes, adult</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="receipt_popUp_trip_info_con">
+                        <p>Trip Information</p>
+                        <div class="receipt_popUp_trip_info">
+                            <div class="receipt_popUp_trip_info_det">
+                                <p class="receipt_popUp_heading">Departure date</p>
+                                <p class="receipt_popUp_info"> <span>Mon, Nov 3, 2025, 06:00 am —</span> Paranaque Integrated Terminal Exchange, Manila - Legazpi, Grand Central Terminal</p>
+                            </div>
+
+                            <div class="receipt_popUp_trip_info_det">
+                                <p class="receipt_popUp_heading">Payment Method</p>
+                                <div class="receipt_popUp_pay_method_con">
+                                    <p>PayMaya</p>
+                                    <div class="receipt_popUp_payment_logo">
+                                        <img src="~/img/mayaLogo.png" alt="mayaLogo">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+
+                <div class="receipt_main_con">
+                    <div class="receipt_main">
+                        <div class="receipt_information_con">
+                            <div>
+                                <div class="receipt_info">
+                                    <p class="info_head">Departure</p>
+                                    <p>Paranaque Integrated Terminal Exchange, Manila</p>
+                                </div>
+
+                                <div class="receipt_info">
+                                    <p class="info_head">Destination</p>
+                                    <p>Legazpi, Grand Central Terminal</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="receipt_info">
+                                    <p class="info_head">Departure Date</p>
+                                    <p>Mon, Nov 3, 2025, 06:00 am</p>
+                                </div>
+
+                                <div class="receipt_info">
+                                    <p class="info_head">Trip No#</p>
+                                    <p>EAMD039</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="receipt_info">
+                                    <p class="info_head">Gate</p>
+                                    <p>G07</p>
+                                </div>
+
+                                <div class="receipt_info">
+                                    <p class="info_head">Bay</p>
+                                    <p>D23</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="receipt_info">
+                                    <p class="info_head">Date Booked</p>
+                                    <p>11/2/2025 12:45 pm</p>
+                                </div>
+
+                                <div class="receipt_info">
+                                    <p class="info_head">Fare</p>
+                                    <p>₱1,979.00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
     </div>
 
 

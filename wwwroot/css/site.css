@@ -654,7 +654,7 @@ section {
 }
 
 .booking_proc {
-  padding: 0px 20px;
+  padding: 0px 30px 0px 20px;
 }
 
 .booking_proc_modal_con {
@@ -1569,11 +1569,12 @@ footer {
   padding: 20px ;
 }
 
+/* PAYMENT SUCCESS */
 .payment_success {
   width: fit-content;
-  padding: 15px 15px;
+  padding: 15px;
   position: relative;
-  display: flex;
+  display: none;
   gap: 10px;
   align-items: center;
   text-align: center;
@@ -1611,4 +1612,143 @@ footer {
   color: var(--grey) !important;
   font-size: 0.9rem !important;
 }
+
+/* RECEIPT POP UP */
+.receipt_popUp {
+  display: none;
+  position: relative;
+  flex-direction: column;
+  background: var(--white);
+  border-radius: var(--radius);
+  max-width: 690px;
+}
+
+.receipt_popUp_top {
+  background: var(--main-color-red);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  border-radius: var(--radius) var(--radius) 0px 0px;
+}
+
+.receipt_popUp_top p {
+  color: var(--white);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.close_receipt_popUp {
+  position: absolute;
+  width: 15px;
+  cursor: pointer;
+  top: 25px;
+  right: 15px
+}
+
+.receipt_popUp_con {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+}
+
+.receipt_popUp_main {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.receipt_popUp_main_top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-bottom: 1px solid var(--main-color-red);
+  padding-bottom: 10px;
+}
+
+.receipt_popUp_main_top p {
+  color: var(--main-color-blue);
+}
+
+.receipt_popUp_main_top span {
+  font-weight: var(--semibold);
+  color: var(--black);
+}
+
+.receipt_popUp_passenger_info {
+  display: flex;
+  flex-direction: column;
+}
+
+.receipt_popUp_passenger_info p {
+  color: var(--black);
+  font-weight: var(--bold);
+  font-size: 1.1rem;
+}
+
+.receipt_popUp_passenger_info ul {
+  list-style-type: unset;
+  padding-left: 50px;
+}
+
+.receipt_popUp_trip_info_con {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--main-color-red);
+  padding-bottom: 10px;
+}
+
+.receipt_popUp_trip_info_con p {
+  font-size: 1.1rem;  
+  font-weight: var(--bold);
+}
+
+.receipt_popUp_trip_info {
+  display: flex;
+  flex-direction: column;
+  padding-left: 15px;
+  gap: 5px;
+}
+
+.receipt_popUp_trip_info p {
+  font-size: 0.95rem;
+  font-weight: var(--regular);
+  color: var(--grey);
+}
+
+.receipt_popUp_heading {
+  font-weight: var(--semibold) !important;
+  font-size: 1rem !important;
+  color: var(--black) !important;
+}
+
+.receipt_popUp_info {
+  padding-left: 15px;
+}
+
+.receipt_popUp span {
+  font-weight: var(--semibold) !important;
+  color: var(--black);
+}
+
+.receipt_popUp_pay_method_con {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 15px;
+}
+
+.receipt_popUp_pay_method_con p {
+  color: var(--black);
+}
+
+.receipt_popUp_payment_logo {
+  display: flex;
+  align-self: flex-end;
+  width: 65px;
+}
+
+
+
 

@@ -54,6 +54,7 @@ if (page) {
     // PASSENGER POP UP
     let passengerPopUp;
     let passengerPopUpDoneBtn;
+    let insurancePopUp;
 
     // BUS POP UP
     let busPicInsidePopUp;
@@ -101,6 +102,23 @@ if (page) {
                 busPicOutsidePopUp = document.getElementById("busPicOutsidePopUp");
 
                 busPicOutsidePopUp.classList.toggle("show");
+            });
+        }
+
+        // PASSENGERS
+        if (page.textContent.toLowerCase() === "passengers") {
+            const insuranceBtn = document.getElementById("insuranceBtn");
+            
+            insurancePopUp = document.getElementById("insurancePopUp");
+            insuranceBtn.addEventListener("click", () => {
+
+                insurancePopUp.classList.toggle("show");
+            });
+            
+            insurancePopUp.addEventListener("click", (e) => {
+                if (e.target != insurancePopUp) {
+                    insurancePopUp.classList.remove("show");
+                }
             });
         }
 

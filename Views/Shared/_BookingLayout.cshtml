@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="booking_bot">
-                    <div class="total_con">
+                    <div class="total_con" id="totalCon">
                         <div class="total">
                             <p><span>Total</span></p>
                             <p>₱1,979</p>
@@ -55,7 +55,7 @@
                         </div>
                     </div>
 
-                    <div class="booking_btn_con">
+                    <div class="booking_btn_con" id="bookingBtnCon">
                         <button id="nextBtn" onclick="location.href=`@Url.Action((string)@ViewBag.Page, "Home")`">Next</button>
                         <button id="payBtn" class="payBtn inactiveBtn" onclick="location.href=`@Url.Action("GCashMain", "GCash")`">Pay ₱1.979</button>
                         <button id="homeBtn" class="homeBtn inactiveBtn" onclick="location.href=`@Url.Action("Main", "Home")`">Back to home</button>
@@ -190,6 +190,16 @@
                     </div>
                 </div> 
             </div>
+        </div>
+
+
+        <!-- BUS PIC -->
+        <div class="busPic_popUp inside" id="busPicInsidePopUp">
+            <img src="~/img/bus/dltbco/insideBus.png" alt="insideBus">
+        </div>
+
+        <div class="busPic_popUp outside" id="busPicOutsidePopUp">
+            <img src="~/img/bus/dltbco/bus.png" alt="bus">
         </div>
     </div>
 

@@ -7,9 +7,12 @@ const payment = "payment";
 
 console.log(page.textContent.toLowerCase())
 
+const bookingBtnCon = document.getElementById("bookingBtnCon");
 const nextBtn = document.getElementById("nextBtn");
 const payBtn = document.getElementById("payBtn");
 const homeBtn = document.getElementById("homeBtn");
+
+const totalCon = document.getElementById("totalCon");
 
 if (page.textContent.toLowerCase() === "payment") {
     console.log("To payment gateway");
@@ -23,6 +26,9 @@ if (page.textContent.toLowerCase() === "payment") {
     payBtn.classList.add("inactiveBtn");
     homeBtn.classList.add("activeBtn");
     homeBtn.classList.remove("inactiveBtn");
+
+    totalCon.classList.add("hide");
+    bookingBtnCon.classList.add("setPaddingBtn");
 } else {
     console.log("next");
     nextBtn.classList.add("activeBtn");
@@ -37,16 +43,30 @@ const popUpCon = document.getElementById("popUpCon");
 const closeBtn = document.getElementById("closeBtn");
 let receiptPopUp;
 let successPayPopUp;
+let busPicInsidePopUp;
+let busPicOutsidePopUp;
 
-    // QR
-    const qrCode = document.getElementById("qrCode");
 
-    qrCode.addEventListener("click", () => {
-        receiptPopUp = document.getElementById("receiptPopUp");
+    // BUS PIC 
+    if (page.textContent.toLowerCase() === "itinerary") {
+        const busInside = document.getElementById("busInside");
+        const busOutside = document.getElementById("busOutside");
 
-        popUpCon.classList.toggle("show");
-        receiptPopUp.classList.toggle("show");
-    });
+        
+        busInside.addEventListener("click", () => {
+            popUpCon.classList.toggle("show");
+            busPicInsidePopUp = document.getElementById("busPicInsidePopUp");
+
+            busPicInsidePopUp.classList.toggle("show");
+        });
+
+        busOutside.addEventListener("click", () => {
+            popUpCon.classList.toggle("show");
+            busPicOutsidePopUp = document.getElementById("busPicOutsidePopUp");
+
+            busPicOutsidePopUp.classList.toggle("show");
+        });
+    }
 
     // SUCCESS PAYMENT
     if (page.textContent.toLowerCase() === "receipt") {
@@ -56,14 +76,38 @@ let successPayPopUp;
         successPayPopUp.classList.toggle("show");
     }
 
+    // QR
+    if (page.textContent.toLowerCase() === "receipt") {
+        const qrCode = document.getElementById("qrCode");
+
+        qrCode.addEventListener("click", () => {
+            receiptPopUp = document.getElementById("receiptPopUp");
+
+            popUpCon.classList.toggle("show");
+            receiptPopUp.classList.toggle("show");
+        });
+    }
+
 
 // CLOSE FUNCTION
 closeBtn.addEventListener("click", () => {
     popUpCon.classList.remove("show");
-    receiptPopUp.classList.remove("show");
+
+    if (page.textContent.toLocaleLowerCase() === "receipt") {
+        successPayPopUp.classList.remove("show");
+        receiptPopUp.classList.remove("show");
+    }
 });
 
 popUpCon.addEventListener("click", () => {
     popUpCon.classList.remove("show");
-    receiptPopUp.classList.remove("show");
+    if (page.textContent.toLocaleLowerCase() === "itinerary") {    
+        busPicOutsidePopUp.classList.remove("show");
+        busPicInsidePopUp.classList.remove("show");
+    }
+
+    if (page.textContent.toLocaleLowerCase() === "receipt") {
+        successPayPopUp.classList.remove("show");
+        receiptPopUp.classList.remove("show");
+    }
 });

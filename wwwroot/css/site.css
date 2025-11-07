@@ -1555,6 +1555,14 @@ footer {
   display: flex !important;
 }
 
+.hide {
+  display: none !important;
+}
+
+.setPaddingBtn {
+  padding: 15px 90px !important; 
+}
+
 .popup_con {
   position: fixed;
   z-index: 9999;
@@ -1749,6 +1757,16 @@ footer {
   width: 65px;
 }
 
+/* BUS PIC */
+.busPic_popUp.inside {
+  display: none;
+}
 
+.busPic_popUp.outside {
+  display: none;
+}
 
+.busPic_popUp img {
+  border-radius: var(--radius);
+}
 

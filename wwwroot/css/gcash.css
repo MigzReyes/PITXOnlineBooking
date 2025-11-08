@@ -184,7 +184,8 @@ main {
 
 .pop_up_main {
     height: auto;
-    width: var(--pop-width-reg);
+    max-width: var(--pop-width-reg);
+    width: fit-content;
     background: var(--white);
     border-radius: var(--border-radius);
     box-shadow: 0px 0px 10px var(--border-shadow);
@@ -383,6 +384,7 @@ main {
 .mpin_verification {
     display: none;
     flex-direction: column;
+    width: var(--pop-width-sm);
     height: var(--pop-height-sm);
     gap: 40px;
     padding: var(--padding) var(--padding-lg);
@@ -685,6 +687,14 @@ main {
 
 
 @media (max-width: 1120px) {
+    html {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
+    
     .button_opacity {
         visibility: hidden;
     }

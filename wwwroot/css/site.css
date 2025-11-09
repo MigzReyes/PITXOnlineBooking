@@ -80,7 +80,7 @@ input {
   border-radius: var(--radius);
   padding: 8px 10px;
   border: var(--border);
-  font-size: 1rem;
+  font-size: 1em;
   font-weight: var(--semibold);
   width: 100%;
 }
@@ -536,7 +536,7 @@ section {
   z-index: 2;
   display: none;
   right: -125px;
-  top: 70px;
+  top: 65px;
   max-width: 330px;
   flex-direction: column;
   gap: 10px;
@@ -548,7 +548,7 @@ section {
 
 .destination_input_popUp span {
   font-weight: var(--semibold);
-  font-size: 0.95rem;
+  font-size: 0.95em;
   color: var(--black);
 }
 
@@ -1826,13 +1826,15 @@ footer {
 }
 
 .payment_success_heading {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   font-size: 1.2rem;
 }
 
 .payment_success_heading .redLine {
   margin: 0;
-  justify-self: center;
+  align-self: center;
   width: 40%;
   border-bottom: 1px solid var(--main-color-red);
 }
@@ -1889,6 +1891,7 @@ footer {
   flex-direction: column;
   gap: 15px;
   padding: 20px;
+  overflow-y: auto;
 }
 
 .receipt_popUp_main {
@@ -2010,6 +2013,10 @@ footer {
   }
 
   /* BOOKING */
+  .destination_input_popUp {
+    top: 60px;
+  }
+
   .booking_bus_list_con {
     padding: 125px 10px 0px;
   }
@@ -2069,6 +2076,10 @@ footer {
   }
 
   /* BOOKING */
+  .destination_input_popUp {
+    top: 55px;
+  }
+
   .departureDestinationArrow {
     width: 25px;
   }
@@ -2304,6 +2315,10 @@ footer {
   }
 
   /* BOOKING */
+  .destination_input_popUp {
+    max-width: 225px;
+  }
+
   .booking_modal_con {
     margin: 0px 10px;
   }
@@ -2402,6 +2417,12 @@ footer {
   }
 
   /* BOOKING */
+  .destination_input_popUp {
+    max-width: 220px;
+    right: -120px;
+    top: 50px;
+  }
+
   .booking_bus_list_con {
     padding: 115px 10px;
   }
@@ -2487,6 +2508,10 @@ footer {
 @media (max-width: 400px) {
 
   /* BOOKING */
+  .destination_input_popUp{
+    max-width: 200px;
+  }
+
   .booking_modal_con {
     width: 325px;
   }
@@ -2511,6 +2536,13 @@ footer {
 
 }
 
+@media (max-width: 380px) {
+  .destination_input_popUp {
+    max-width: 180px;
+    right: -105px;
+  }
+}
+
 @media (max-width: 340px) {
   /* MAIN */
   .tbody {
@@ -2526,6 +2558,11 @@ footer {
   .booking_modal_con{
     width: 315px;
     padding: 10px;
+  }
+
+  .destination_input_popUp {
+    max-width: 170px;
+    right: -90px;
   }
 
   /* ITINERARY */

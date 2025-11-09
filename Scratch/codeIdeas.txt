@@ -45,6 +45,7 @@ TICKET FORMAT
 // BACKEND
 	Automate Bus Booking List
 
+	Create a data set that contains the destination, operator (Bus brand) and types bus (lazyboy, sleeper), images, 
 		
 
 

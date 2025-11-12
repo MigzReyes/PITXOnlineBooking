@@ -1,4 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using PITXOnlineBooking;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseMySql(
+            builder.Configuration.GetConnectionString("DefaultConnection"),
+            new MySqlServerVersion(new Version(8, 0, 33)) // MySQL version
+        )
+    );
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

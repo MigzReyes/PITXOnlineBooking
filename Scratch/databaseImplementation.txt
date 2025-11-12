@@ -1,0 +1,138 @@
+DATABASE EF CORE FOR ASP.NET 
+
+
+1st - Download Entity Framework Core package in the terminal
+
+    dotnet add package Pomelo.EntityFrameworkCore.MySql
+    dotnet add package Microsoft.EntityFrameworkCore.Design
+
+
+2nd - Create a class ApplicationDbContext.cs inside Data folder
+
+    Create a Data folder inside the project root
+
+    Create a file called "ApplicationDbContext.cs" inside the Data folder
+
+    Code: 
+
+    using Microsoft.EntityFrameworkCore;
+    using projectName.Models;
+
+    namespace projectName.Data
+    {
+        public class ApplicationDbContext : DbContext
+        {
+            public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+                    : base(options)
+            {
+            }
+        }
+
+    }
+
+
+3rd - Configure connection string inside appsettings.Development.json 
+
+    NOTE! Always use appsettings.Development.json for database connection string
+    NOTE! Put the appsettings.Development.json inside your .gitignore
+
+    Code:
+
+    "ConnectionStrings": {
+        "DefaultConnection": "Server=localhost;Database=mydb;User=root;Password=yourpassword;"
+    }
+
+
+4th - Download MySQL workbench
+
+    And create a connection
+
+    Name the connection
+
+    Change the hostname to localhost
+
+5th - Configure your Program.cs
+
+    Code:
+
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseMySql(
+            builder.Configuration.GetConnectionString("DefaultConnection"),
+            new MySqlServerVersion(new Version(8, 0, 33)) // MySQL version
+        )
+    );
+
+    NOTE! Always put this after initializing the builder variable
+
+
+6th - Create a model class
+
+    Code:
+
+    using Microsoft.AspNetCore.Identity;
+
+    namespace projectName.Models
+    {
+        public class sampleModel
+        {
+            public int Id { get; set; }
+            public int PhoneNum { get; set; }
+            public int Amount { get; set; }
+            public int AvailBalance { get; set; }
+            public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+            // This will be the attributes or properties (Column) of your table
+            // No need to use SQL statements
+        }
+    }
+
+    NOTE! Always put the word "Model" at the very last part
+    NOTE! Always use PascalCase
+
+7th - Call your model class inside ApplicationDbContext.cs
+
+    Code:
+
+    using Microsoft.EntityFrameworkCore;
+    using projectName.Models;
+
+    namespace projectName.Data
+    {
+        public class ApplicationDbContext : DbContext
+        {
+            public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+                    : base(options)
+            {
+            }
+
+            public DbSet<sampleModel> sampleTable { get; set; }
+        }
+    }
+
+    NOTE! The variable name will be the table name in your MySQL workbench, "sampleTable" will be the   
+    name of the table inside your mySQL workbench
+
+8th - Migrate (Save) and update database
+
+    dotnet ef migrations add UpdateInfo
+
+    NOTE!!! This is important because this saved your project database schema, it technically helps
+    to build your database from scratch especially if the project is forked
+
+    dotnet ef database update
+
+    - This will reflect the changes to your MySQL workbench
+
+
+9th - Use ApplicationDbContext to your controllers
+
+    Code:
+
+    private readonly ILogger<HomeController> _logger;
+    private readonly ApplicationDbContext _context;
+
+    public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+    {
+        _context = context;
+        _logger = logger;
+    }

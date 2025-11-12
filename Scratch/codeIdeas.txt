@@ -45,9 +45,53 @@ TICKET FORMAT
 // BACKEND
 	Automate Bus Booking List
 
-	Create a data set that contains the destination, operator (Bus brand) and types bus (lazyboy, sleeper), images, 
-		
+	Create a data set that contains the destination, operator (Bus brand) and types bus (lazyboy, sleeper), and images
 
+	Entities:
+
+		Bus		
+			- Operator 
+			- Type
+			- ImgInside
+			-ImgOutside
+
+
+	RECEIPT:
+		After succesfull payment, send the JSON OBJECT to the database for permanent data, after that show the data from the database
+		to the receipt page.
+
+		ticket no# - will automatically be created after succesfull payment
+
+		date booked - will get the createdAt data
+
+		gate, bay, and trip# - will also be automatically created after succesfull payment
+
+
+
+		JSON OBJECT SCHEMA
+
+			USE `sessionStorage` for lcoal storage, to temporarily store user data inside an object.
+
+			- This will be used to store the data, rather than putting the data straigthly into the database, ONLY INSERT THE DATA OF THE USER
+			AFTER SUCCESSFUL PAYMENT TO AVOID UNNECESSARY DATA AND DDOS ATTACK. Use the JSON OBJECT to insert the data to the database based	
+			on the `key`
+
+			NOTE! ALWAYS NAME THE KEY THE SAME AS THE PROPERTIES (ATTIRBUTES) ON WHICH THE JSON OBJECT SCHEMA IS BASED ON.
+
+
+		Based on the trip in booking.cshtml get the tripId then if the user click the `book now` use the tripId to get the data from the	
+		database to be sent into an object
+
+
+		Research a destination from PITX and get the average trip time, create a static set of data with fixed trip time
+
+		Example
+
+				PITX to Legazpi is automatically 14 hours, and will usually show within the afternnoon.
+
+				The id of passnger will depend on the id of the user (Main Passenger)
+
+			
 
 // DATABASE
 	Entities

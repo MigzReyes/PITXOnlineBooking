@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PITXOnlineBooking.Models
 {
@@ -18,8 +19,9 @@ namespace PITXOnlineBooking.Models
         [Required]
         public required DateTime ArrivalTime { get; set; }
 
+        [Column(TypeName = "TIME")]
         [Required]
-        public required decimal TotalTripTime { get; set; }
+        public required TimeSpan TotalTripTime { get; set; }
 
         [Required]
         public required string TripNo { get; set; }
@@ -32,6 +34,9 @@ namespace PITXOnlineBooking.Models
 
         [Required]
         public required int Price { get; set; }
+
+        [Required]
+        public required DateTime TripDate { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }

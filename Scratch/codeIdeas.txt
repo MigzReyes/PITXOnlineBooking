@@ -94,11 +94,50 @@ TICKET FORMAT
 			
 
 			TO-DO!!!
-				Put the necessary data into the database
+				Use C# to automate booking List at the back end and store it in the trip table with randomize
+				tripNo, gate, departrue time, and bay
 
-				Use javascript to automate booking and 
+				Create a randomizer from 1 to 22 and use the number to get the data from bustrip based on the id 
+
+					bustrip data:
+						BusId
+						Desination 
+						TotalTripTime
+						Price 
+
+					Within the booking.cs backend we will randomize tripNo, gate, departure time, and bay
+
+					and after that store it in the trip table 
 
 
+					Trip Date? How can you randomize the date? How can I separate the tomorrow trip to the other days trip?
+
+					Let us say I will just set a maximum trip per day. Or randomize the maximum trip in a day around 
+					5 to 10 only 
+
+					And then only set the trip for tomorrow not today, because its a provincial bus trip that takes around	
+					half day of a journey. Just set a message when the "Today" is chosen "No trip, for provincial trips"
+
+					After that set the trip date range to be always from 1 - 7 days from today. Wherein, the online booking		
+					will only service for a week of provincial bus trip not more or less than a week. 
+
+					NOTE!!! If the trip departure time expires, remove it in the database, always based on the current timestamp.
+
+					Should I store the Trip date in the table? 
+						Yes, because it will be used by the system to know if it surpasses the departure time.
+
+					Then how would I know the Trip Date of a trip?
+
+						By getting the date today and randomizing 1 to 7 and add the number from today to get the trip date.
+
+
+		NOTE!!! Clean code later!!
+
+
+
+					Create a POST request from the front-end using JavaScript to the back-end for destination Pop-up
+
+					Wherein if I choose `Legazpi` only trips from legazpi will show
 
 Buses Trip hours
 

@@ -135,7 +135,7 @@
                     <div class="booking_info_con">
                         <div class="booking_info">
                             <div class="booking_info_departure">
-                                <p class="time">20:30</p>
+                                <p class="time">@Model.Trip.DepartureTime</p>
                                 <p>Paranaque Integrated Terminal Exchange</p>
                             </div>
 
@@ -149,13 +149,13 @@
                                 </div>
 
                                 <div class="trip_info">
-                                    <p>10h 1m | @Model.Bus.Operator | Bus | <span>@Model.Bus.Type</span></p>
+                                    <p>@Model.Trip.TotalTripTime | @Model.Bus.Operator | Bus | <span>@Model.Bus.Type</span></p>
                                 </div>
                             </div>
 
                             <div class="booking_info_destination">
-                                <p class="time">06:30</p>
-                                <p>Legazpi, Grand Central Terminal</p>
+                                <p class="time">@Model.Trip.ArrivalTime</p>
+                                <p>@Model.BusTrip.Destination</p>
                             </div>
                         </div>
 
@@ -174,7 +174,7 @@
 
                     <div class="booking_price_con">
                         <div class="booking_price_con_info"> 
-                            <p class="price">₱1,825</p>
+                            <p class="price">₱@Model.BusTrip.TripPrice</p>
                             <p>Taxes Included | per adult</p>
                         </div>
                         

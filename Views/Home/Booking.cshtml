@@ -141,7 +141,7 @@
 
                             <div class="booking_info_bus_info">
                                 <div class="booking_info_bus_logo">
-                                    <img src="~/img/bus/dltbco/dltbLogo.png" alt="dltbLogo">
+                                    <img src="@Model.Bus.BusLogo" alt="dltbLogo">
                                 </div>
 
                                 <div class="booking_info_bus_icon">
@@ -149,7 +149,7 @@
                                 </div>
 
                                 <div class="trip_info">
-                                    <p>10h 1m | DLTBCo | Bus | <span>LazyBoy</span></p>
+                                    <p>10h 1m | @Model.Bus.Operator | Bus | <span>@Model.Bus.Type</span></p>
                                 </div>
                             </div>
 
@@ -161,122 +161,11 @@
 
                         <div class="bus_pic_con">
                             <div class="busPic">
-                                <img src="~/img/bus/dltbco/insideBus.png" alt="insideBus">
+                                <img src="@Model.Bus.ImgInside" alt="insideBus">
                             </div>
 
                             <div class="busPic">
-                                <img src="~/img/bus/dltbco/bus.png" alt="bus">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="redLine"></div>
-
-                    <div class="booking_price_con">
-                        <div class="booking_price_con_info"> 
-                            <p class="price">₱1,825</p>
-                            <p>Taxes Included | per adult</p>
-                        </div>
-                        
-                        <div class="bus_trip_book_btn_con">
-                            <button onclick="location.href=`@Url.Action("Itinerary", "Home")`">Book Now!</button>
-                        </div>
-                    </div>  
-                </div>
-            </li>
-
-            <li>
-                <div class="booking_bus_list">
-                    <div class="booking_info_con">
-                        <div class="booking_info">
-                            <div class="booking_info_departure">
-                                <p class="time">20:30</p>
-                                <p>Paranaque Integrated Terminal Exchange</p>
-                            </div>
-
-                            <div class="booking_info_bus_info">
-                                <div class="booking_info_bus_logo">
-                                    <img src="~/img/bus/dltbco/dltbLogo.png" alt="dltbLogo">
-                                </div>
-
-                                <div class="booking_info_bus_icon">
-                                    <img src="~/icons/bus.svg" alt="bus">
-                                </div>
-
-                                <div class="trip_info">
-                                    <p>10h 1m | DLTBCo | Bus | <span>LazyBoy</span></p>
-                                </div>
-                            </div>
-
-                            <div class="booking_info_destination">
-                                <p class="time">06:30</p>
-                                <p>Legazpi, Grand Central Terminal</p>
-                            </div>
-                        </div>
-
-                        <div class="bus_pic_con">
-                            <div class="busPic">
-                                <img src="~/img/bus/dltbco/insideBus.png" alt="insideBus">
-                            </div>
-
-                            <div class="busPic">
-                                <img src="~/img/bus/dltbco/bus.png" alt="bus">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="redLine"></div>
-
-                    <div class="booking_price_con">
-                        <div class="booking_price_con_info"> 
-                            <p class="price">₱1,825</p>
-                            <p>Taxes Included | per adult</p>
-                        </div>
-                        
-                        <div class="bus_trip_book_btn_con">
-                            <button onclick="location.href=`@Url.Action("Itinerary", "Home")`">Book Now!</button>
-                        </div>
-                    </div>  
-                </div>
-            </li>
-
-
-            <li>
-                <div class="booking_bus_list">
-                    <div class="booking_info_con">
-                        <div class="booking_info">
-                            <div class="booking_info_departure">
-                                <p class="time">20:30</p>
-                                <p>Paranaque Integrated Terminal Exchange</p>
-                            </div>
-
-                            <div class="booking_info_bus_info">
-                                <div class="booking_info_bus_logo">
-                                    <img src="~/img/bus/dltbco/dltbLogo.png" alt="dltbLogo">
-                                </div>
-
-                                <div class="booking_info_bus_icon">
-                                    <img src="~/icons/bus.svg" alt="bus">
-                                </div>
-
-                                <div class="trip_info">
-                                    <p>10h 1m | DLTBCo | Bus | <span>LazyBoy</span></p>
-                                </div>
-                            </div>
-
-                            <div class="booking_info_destination">
-                                <p class="time">06:30</p>
-                                <p>Legazpi, Grand Central Terminal</p>
-                            </div>
-                        </div>
-
-                        <div class="bus_pic_con">
-                            <div class="busPic">
-                                <img src="~/img/bus/dltbco/insideBus.png" alt="insideBus">
-                            </div>
-
-                            <div class="busPic">
-                                <img src="~/img/bus/dltbco/bus.png" alt="bus">
+                                <img src="@Model.Bus.ImgOutside" alt="bus">
                             </div>
                         </div>
                     </div>
@@ -311,7 +200,7 @@
 
                             <div class="booking_info_bus_info">
                                 <div class="booking_info_bus_logo">
-                                    <img src="~/img/bus/dltbco/dltbLogo.png" alt="dltbLogo">
+                                    <img src="@Model.Bus.BusLogo" alt="dltbLogo">
                                 </div>
 
                                 <div class="booking_info_bus_icon">
@@ -319,7 +208,7 @@
                                 </div>
 
                                 <div class="trip_info">
-                                    <p>10h 1m | DLTBCo | Bus | <span>LazyBoy</span></p>
+                                    <p>10h 1m | @Model.Bus.Operator | Bus | <span>@Model.Bus.Type</span></p>
                                 </div>
                             </div>
 
@@ -331,11 +220,11 @@
 
                         <div class="bus_pic_con">
                             <div class="busPic" id="busInsideBookingList">
-                                <img src="~/img/bus/dltbco/insideBus.png" alt="insideBus">
+                                <img src="@Model.Bus.ImgInside" alt="insideBus">
                             </div>
 
                             <div class="busPic" id="busOutsideBookingList">
-                                <img src="~/img/bus/dltbco/bus.png" alt="bus">
+                                <img src="@Model.Bus.ImgOutside" alt="bus">
                             </div>
                         </div>
                     </div>

@@ -7,10 +7,11 @@ namespace PITXOnlineBooking.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    private readonly ApplicationDbContext _context;
+    public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
     public IActionResult Main()
@@ -20,7 +21,16 @@ public class HomeController : Controller
 
     public IActionResult Booking()
     {
-        return View();
+        var bus = _context.Bus.FirstOrDefault(b => b.Id == 11);
+
+        // ALWAYS USE ViewModels.cs 
+        var vm = new ViewModels
+        {
+            Bus = bus
+        };
+
+
+        return View(vm);
     }
 
     public IActionResult Itinerary()

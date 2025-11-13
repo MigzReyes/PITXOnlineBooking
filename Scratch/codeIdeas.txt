@@ -93,6 +93,71 @@ TICKET FORMAT
 
 			
 
-// DATABASE
-	Entities
+			TO-DO!!!
+				Put the necessary data into the database
+
+				Use javascript to automate booking and 
+
+
+
+Buses Trip hours
+
+	PITX to Baguio - 8 hr 30 min
+	PITX to Naga - 10hr 25 min
+	PITX to Legazpi - 12 hr 25 min
+	PITX to Sorsogon - 13 hr 0 min
+
+Buses for north (baguio)
+
+Victory Liner
+	- Regular AC
+		PITX to Baguio - 805 Pesos
+
+	- First Class
+		PITX to Baguio - 1,233 Pesos
+
+	- Deluxe
+		PITX to Baguio - 922 Pesos
+
+Buses for south (Bicol)
+
+DLTBCo
+	- Lazyboy
+		PITX to Legazpi - 1,693 Pesos
+
+	- Seater 41
+		PITX to Legazpi - 1,467 Pesos
+		PITX to Naga - 1,162 Pesos
+
+Isarog Line 
+	- Regular
+		PITX to Legazpi - 1,049 Pesos
+		PITX to Naga - 1,852 Pesos 
+		PITX to Sorsogon - 2,305 Pesos
+
+	- Single Seater
+		PITX to Legazpi - 1,393 Pesos
+		PITX to Naga - 1,393 Pesos
+		
+
+	- Elite
+		PITX to Legazpi - 1,794 Pesos
+		PITX to Naga - 1,450 Pesos
+
+Penafrancia Tours
+	- Regular
+		PITX to Legazpi - 1,049 Pesos
+		PITX to Naga - 1,049 Pesos
+		PITX to Sorsogon - 1,164 Pesos
+
+	- Skybus WC 
+		PITX to Legazpi - 1,318 Pesos
+		PITX to Naga - 1,318 Pesos
+		PItX to Sorsogon - 1,433 Pesos
+
+	- Elite
+		PITX to Legazpi - 1,794 Pesos
+		PITX to Naga - 1,450 Pesos
+		PITX to Sorsogon - 2,024 Pesos
+
 

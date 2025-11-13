@@ -18,6 +18,9 @@ namespace PITXOnlineBooking.Models
         [Required]
         public required string ImgOutside { get; set; }
 
+        [Required]
+        public required string BusLogo { get; set; }
+
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }

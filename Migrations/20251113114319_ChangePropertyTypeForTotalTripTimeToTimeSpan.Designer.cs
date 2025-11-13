@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PITXOnlineBooking;
 
@@ -11,9 +12,11 @@ using PITXOnlineBooking;
 namespace PITXOnlineBooking.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251113114319_ChangePropertyTypeForTotalTripTimeToTimeSpan")]
+    partial class ChangePropertyTypeForTotalTripTimeToTimeSpan
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,8 +122,8 @@ namespace PITXOnlineBooking.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<decimal>("TotalTripTime")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<TimeSpan>("TotalTripTime")
+                        .HasColumnType("time(6)");
 
                     b.Property<int>("TripPrice")
                         .HasColumnType("int");
@@ -241,8 +244,8 @@ namespace PITXOnlineBooking.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("TotalTripTime")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<TimeSpan>("TotalTripTime")
+                        .HasColumnType("time(6)");
 
                     b.Property<string>("TripNo")
                         .IsRequired()

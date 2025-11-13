@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PITXOnlineBooking;
 
@@ -11,9 +12,11 @@ using PITXOnlineBooking;
 namespace PITXOnlineBooking.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251112164448_UpdatedBusTripTimeToBusTrip")]
+    partial class UpdatedBusTripTimeToBusTrip
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,10 +75,6 @@ namespace PITXOnlineBooking.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("BusLogo")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -108,9 +107,6 @@ namespace PITXOnlineBooking.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BusId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Departure")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -119,8 +115,8 @@ namespace PITXOnlineBooking.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<decimal>("TotalTripTime")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<DateTime>("TotalTripTime")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("TripPrice")
                         .HasColumnType("int");
@@ -241,8 +237,8 @@ namespace PITXOnlineBooking.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("TotalTripTime")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<DateTime>("TotalTripTime")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("TripNo")
                         .IsRequired()

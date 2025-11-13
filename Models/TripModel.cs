@@ -19,7 +19,7 @@ namespace PITXOnlineBooking.Models
         public required DateTime ArrivalTime { get; set; }
 
         [Required]
-        public required DateTime TotalTripTime { get; set; }
+        public required decimal TotalTripTime { get; set; }
 
         [Required]
         public required string TripNo { get; set; }

@@ -17,5 +17,6 @@ namespace PITXOnlineBooking
         public DbSet<PayMayaModel> PayMaya { get; set; }
         public DbSet<TripModel> Trip { get; set; }
         public DbSet<UserModel> User { get; set; }
+        public DbSet<BusTripModel> BusTrip { get; set; } 
     }
 }

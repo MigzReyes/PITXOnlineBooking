@@ -676,6 +676,10 @@ section {
   width: 30px;
 }
 
+.booking_info_bus_logo img {
+  border-radius: var(--radius);
+}
+
 .booking_info_bus_icon {
   width: 30px;
 }
@@ -708,6 +712,9 @@ section {
 
 .busPic img {
   border-radius: var(--radius);
+  width: 115px;
+  height: 76px;
+  object-fit: cover;
 }
 
 .booking_price_con {
@@ -2489,6 +2496,10 @@ footer {
 
   .booking_info_bus_logo {
     width: 25px;
+  }
+  
+  .booking_info_bus_logo img {
+    border-radius: var(--radius);
   }
 
   .booking_bus_list {

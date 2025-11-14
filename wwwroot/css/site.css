@@ -434,6 +434,14 @@ section {
   color: var(--main-color-blue);
 }
 
+#destinationCity {
+  color: var(--black) !important;
+}
+
+#destinationProvince {
+  color: var(--black) !important;
+}
+
 .departureDestination_con {
   display: flex;
   gap: 10px;
@@ -446,6 +454,10 @@ section {
   flex-direction: column;
   width: 100%;
   font-size: 0.95rem;
+}
+
+#destinationInput:hover {
+  cursor: pointer;
 }
 
 .departureDestination_top {
@@ -583,10 +595,21 @@ section {
   padding-left: 5px;
 }
 .destination_popUp_list ul {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
   list-style: none;
+}
+
+.destination_popUp_list li {
+  width: 100%;
+  padding: 5px 0px;
+}
+
+.destination_popUp_list li:hover {
+  background: rgba(128, 128, 128, 0.25);
+  cursor: pointer;
+  border-radius: var(--radius);
 }
 
 .destination_popUp_con {
@@ -2030,31 +2053,25 @@ footer {
 
   @media (max-height: 1000px) {
     .booking_bus_list_con {
-      padding: 105px 10px;
+      padding: 135px 10px 0px;
     }
   }
 
   @media (max-height: 860px) {
     .booking_bus_list_con {
-      padding: 125px 10px;
+      padding: 145px 10px 0px;
     }
   }
 
   @media (max-height: 760px) {
     .booking_bus_list_con {
-      padding: 135px 10px;
+      padding: 155px 10px 0px;
     }
   }
 
   @media (max-height: 715px) {
     .booking_bus_list_con {
-      padding: 155px 10px;
-    }
-  }
-
-  @media (max-height: 700px) {
-    .booking_bus_list_con {
-      padding: 165px 10px;
+      padding: 165px 10px 0px;
     }
   }
 }
@@ -2102,37 +2119,37 @@ footer {
 
   @media (max-height: 1000px) {
     .booking_bus_list_con {
-      padding: 70px 10px;
+      padding: 110px 10px 0px;
     }
   }
 
   @media (max-height: 860px) {
     .booking_bus_list_con {
-      padding: 90px 10px;
+      padding: 120px 10px 0px;
     }
   }
 
   @media (max-height: 760px) {
     .booking_bus_list_con {
-      padding: 95px 10px;
+      padding: 135px 10px 0px;
     }
   }
 
   @media (max-height: 715px) {
     .booking_bus_list_con {
-      padding: 115px 10px;
+      padding: 140px 10px 0px;
     }
   }
 
   @media (max-height: 700px) {
     .booking_bus_list_con {
-      padding: 125px 10px;
+      padding: 165px 10px 0px;
     }
   }
 
   @media (max-height: 600px) {
     .booking_bus_list_con {
-      padding: 135px 10px;
+      padding: 175px 10px 0px;
     }
   }
 
@@ -2169,25 +2186,25 @@ footer {
   /* BOOKING */
   @media (max-height: 1000px) {
     .booking_bus_list_con {
-      padding: 60px 10px;
+      padding: 60px 10px 0px;
     }
   }
 
   @media (max-height: 830px) {
     .booking_bus_list_con {
-      padding: 80px 10px;
+      padding: 80px 10px 0px;
     }
   }
 
   @media (max-height: 710px) {
     .booking_bus_list_con {
-      padding: 95px 10px;
+      padding: 95px 10px 0px;
     }
   }
 
   @media (max-height: 625px) {
     .booking_bus_list_con {
-      padding: 125px 10px;
+      padding: 125px 10px 0px;
     }
   }
 
@@ -2269,25 +2286,25 @@ footer {
 
   @media (max-height: 1000px) {
     .booking_bus_list_con {
-      padding: 60px 10px;
+      padding: 60px 10px 0px;
     }
   }
 
   @media (max-height: 830px) {
     .booking_bus_list_con {
-      padding: 80px 10px;
+      padding: 80px 10px 0px;
     }
   }
 
   @media (max-height: 710px) {
     .booking_bus_list_con {
-      padding: 95px 10px;
+      padding: 95px 10px 0px;
     }
   }
 
   @media (max-height: 625px) {
     .booking_bus_list_con {
-      padding: 125px 10px;
+      padding: 125px 10px 0px;
     }
   }
 
@@ -2336,25 +2353,25 @@ footer {
 
   @media (max-height: 1000px) {
     .booking_bus_list_con {
-      padding: 80px 10px;
+      padding: 80px 10px 0px;
     }
   }
 
   @media (max-height: 830px) {
     .booking_bus_list_con {
-      padding: 100px 10px;
+      padding: 100px 10px 0px;
     }
   }
 
   @media (max-height: 710px) {
     .booking_bus_list_con {
-      padding: 115px 10px;
+      padding: 115px 10px 0px;
     }
   }
 
   @media (max-height: 625px) {
     .booking_bus_list_con {
-      padding: 135px 10px;
+      padding: 135px 10px 0px;
     }
   }
 
@@ -2431,7 +2448,7 @@ footer {
   }
 
   .booking_bus_list_con {
-    padding: 115px 10px;
+    padding: 115px 10px 0px;
   }
 
   .booking_modal_con {
@@ -2466,31 +2483,31 @@ footer {
 
   @media (max-height: 1000px) {
     .booking_bus_list_con {
-      padding: 35px 10px;
+      padding: 35px 10px 0px;
     }
   }
 
   @media (max-height: 880px) {
     .booking_bus_list_con {
-      padding: 55px 10px;
+      padding: 55px 10px 0px;
     }
   }
 
   @media (max-height: 770px) {
     .booking_bus_list_con {
-      padding: 65px 10px;
+      padding: 65px 10px 0px;
     }
   }
 
   @media (max-height: 740px) {
     .booking_bus_list_con {
-      padding: 75px 10px;
+      padding: 75px 10px 0px;
     }
   }
 
   @media (max-height: 670px) {
     .booking_bus_list_con {
-      padding: 95px 10px;
+      padding: 95px 10px 0px;
     }
   }
 

@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PITXOnlineBooking.DTO;
 using PITXOnlineBooking.Models;
 
 namespace PITXOnlineBooking.Controllers;
@@ -21,17 +23,18 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Booking()
+    public IActionResult Booking() 
     {
-
         // ALWAYS PUT THIS AT THE TOP
-        automatedTrip();
+        AutomatedTrip();
+
+
 
         // GET DATA FROM THE DATABASE
         var getTripData = _context.Trip.OrderByDescending(t => t.CreatedAt).FirstOrDefault();
 
         // GET BUS TRIP
-        var sampleTripId = getTripData!.BusId;
+        var sampleTripId = getTripData!.BusTripId;
         var sampleTrip = _context.BusTrip.FirstOrDefault(t => t.Id == sampleTripId);
 
         // GET BUS INFO
@@ -85,7 +88,7 @@ public class HomeController : Controller
     }
 
     // FUNCTIONS    
-    public void automatedTrip()
+    public void AutomatedTrip()
     {
         // BUS TRIP RANDOMIZER
         int randomTrip = _random.Next(1, 22);
@@ -107,12 +110,13 @@ public class HomeController : Controller
         int[] randomMinuteOptions = {0, 15, 25, 30, 45};
         int randomMinute = randomMinuteOptions[_random.Next(randomMinuteOptions.Length)];
 
-        DateTime departureDateTime = tripDate.AddMinutes(randomMinute);
+        DateTime departureDateTime = tripDate.AddHours(randomHour).AddMinutes(randomMinute);
 
         // CALCULATION OF ARRIVAL TIME
         decimal totalTripTime = trip.TotalTripTime;
         TimeSpan tripDuration = TimeSpan.FromHours((double)totalTripTime);
         DateTime arrival = departureDateTime.Add(tripDuration);
+        Console.WriteLine("Departure: " + departureDateTime);
 
         // TRIP NO 
         string letters = "";
@@ -153,7 +157,7 @@ public class HomeController : Controller
         // INSERT INTO DATABASE
         var insertTrip = new TripModel
         {
-          BusId = tripBusId,
+          BusTripId = tripBusId,
           Destination = trip.Destination,
           DepartureTime = departureDateTime,
           ArrivalTime = arrival,
@@ -167,5 +171,30 @@ public class HomeController : Controller
 
         _context.Trip.Add(insertTrip);
         _context.SaveChanges();
+    }
+
+    
+    [HttpPost]
+    public IActionResult CheckDestination([FromBody] DestinationRequest destination)
+    {
+        var trips = (from trip in _context.Trip join bus in _context.Bus on trip.BusTripId equals bus.Id where trip.Destination == destination.Destination select new
+        {
+            TripId = trip.Id,
+            BusTripId = trip.BusTripId,
+            Destination = trip.Destination,
+            DepartureTime = trip.DepartureTime,
+            ArrivalTime = trip.ArrivalTime,
+            TotalTripTime = trip.TotalTripTime,
+            Price = trip.Price,
+            TripDate = trip.TripDate,
+            Operator = bus.Operator,
+            Type = bus.Type,
+            ImgInside = bus.ImgInside,
+            ImgOutside = bus.ImgOutside,
+            BusLogo = bus.BusLogo
+        }).AsNoTracking()
+        .ToList();
+
+        return Json(trips);
     }
 }

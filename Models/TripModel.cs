@@ -8,7 +8,7 @@ namespace PITXOnlineBooking.Models
         public int Id { get; set; }
 
         [Required]
-        public required int BusId { get; set; }
+        public required int BusTripId { get; set; }
 
         [Required]
         public required string Destination { get; set; }

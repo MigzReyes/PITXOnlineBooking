@@ -133,11 +133,17 @@ TICKET FORMAT
 
 		NOTE!!! Clean code later!!
 
-
+					JAVASCRIPT
 
 					Create a POST request from the front-end using JavaScript to the back-end for destination Pop-up
 
 					Wherein if I choose `Legazpi` only trips from legazpi will show
+
+
+
+					TODO JS
+
+						Create a object that only contains the necessary data to be displayed in the booking list and return it.
 
 Buses Trip hours
 

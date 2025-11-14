@@ -143,7 +143,9 @@ TICKET FORMAT
 
 					TODO JS
 
-						Create a object that only contains the necessary data to be displayed in the booking list and return it.
+						In the book now btn, create a post reqquest to the back-end, while also sending the tripId, and redirect the user to the	
+						booking process, the using the tripId get the data from the database. 
+ 
 
 Buses Trip hours
 

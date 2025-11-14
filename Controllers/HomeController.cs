@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PITXOnlineBooking.DTO;
@@ -28,34 +29,39 @@ public class HomeController : Controller
         // ALWAYS PUT THIS AT THE TOP
         AutomatedTrip();
 
-
-
-        // GET DATA FROM THE DATABASE
-        var getTripData = _context.Trip.OrderByDescending(t => t.CreatedAt).FirstOrDefault();
-
-        // GET BUS TRIP
-        var sampleTripId = getTripData!.BusTripId;
-        var sampleTrip = _context.BusTrip.FirstOrDefault(t => t.Id == sampleTripId);
-
-        // GET BUS INFO
-        var sampleBusId = sampleTrip!.BusId;
-        var sampleBus = _context.Bus.FirstOrDefault(t => t.Id == sampleBusId);
-
-        // ALWAYS USE ViewModels.cs 
-        var vm = new ViewModels
-        {
-            Bus = sampleBus,
-            BusTrip = sampleTrip,
-            Trip = getTripData
-        };
-
-        return View(vm);
+        return View();
     }
 
-    public IActionResult Itinerary()
+    [HttpGet("Home/Itinerary/{tripId}")]
+    public IActionResult Itinerary(int tripId)
     {
         ViewBag.Title = "Itinerary";
         ViewBag.Page = "Passengers";
+
+        Console.WriteLine("Trip Id: " + tripId);
+        var trip = (from trips in _context.Trip join bus in _context.Bus on trips.BusTripId equals bus.Id where trips.Id == tripId select new
+        {
+            TripId = tripId,
+            BusTripId = trips!.BusTripId,
+            Destination = trips.Destination,
+            DepartureTime = trips.DepartureTime,
+            ArrivalTime = trips.ArrivalTime,
+            TotalTripTime = trips.TotalTripTime,
+            TripNo = trips.TripNo,
+            Gate = trips.Gate,
+            Bay = trips.Bay,
+            Price = trips.Price,
+            TripDate = trips.TripDate,
+            Operator = bus.Operator,
+            Type = bus.Type,
+            ImgInside = bus.ImgInside,
+            ImgOutside = bus.ImgOutside,
+            BusLogo = bus.BusLogo
+        }).AsNoTracking()
+        .FirstOrDefault();
+
+        ViewBag.TripJson = trip;
+
         return View("Booking/Itinerary");
     }
 
@@ -175,9 +181,9 @@ public class HomeController : Controller
 
     
     [HttpPost]
-    public IActionResult CheckDestination([FromBody] DestinationRequest destination)
+    public IActionResult CheckTrip([FromBody] CheckTripRequest checkTrip)
     {
-        var trips = (from trip in _context.Trip join bus in _context.Bus on trip.BusTripId equals bus.Id where trip.Destination == destination.Destination select new
+        var trips = (from trip in _context.Trip join bus in _context.Bus on trip.BusTripId equals bus.Id where trip.Destination == checkTrip.Destination && trip.TripDate.Date == checkTrip.TripDate.Date select new
         {
             TripId = trip.Id,
             BusTripId = trip.BusTripId,
@@ -196,5 +202,17 @@ public class HomeController : Controller
         .ToList();
 
         return Json(trips);
+    }
+
+
+    [HttpPost]
+    public IActionResult RedirectToItinerary([FromBody] BookRequest tripId) 
+    {
+        Console.WriteLine("Trip Id: " + tripId.TripId);
+        var trip = _context.Trip.FirstOrDefault(t => t.Id == tripId.TripId);
+
+        return Json(new { redirectUrl = Url.Action("Itinerary", "Home", new { id = tripId.TripId}),
+            tripId = trip
+        });
     }
 }

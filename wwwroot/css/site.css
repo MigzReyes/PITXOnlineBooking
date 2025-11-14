@@ -357,7 +357,8 @@ section {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 45vh;
+  max-height: 45vh;
+  min-height: 280px;
 }
 
 .booking_con_top {
@@ -524,6 +525,25 @@ section {
   font-size: 0.9rem;
 }
 
+.booking_modal_date_con li {
+  align-self: stretch;
+}
+
+.booking_modal_date_con button {
+  background: none;
+  color: var(--black);
+  height: 100%;
+  padding: 1px;
+}
+
+.booking_modal_date_con button.chosen {
+  border-bottom: 1px solid var(--main-color-red);
+}
+
+.booking_modal_date_con button:hover {
+  background: rgba(128, 128, 128, 0.15);
+}
+
 .date_con {
   display: flex;
   flex-direction: column;
@@ -533,13 +553,13 @@ section {
 }
 
 .today {
-  color: var(--main-color-blue);
-  font-weight: var(--semibold);
+  color: var(--main-color-blue) !important;
+  font-weight: var(--semibold) !important;
 }
 
 .tomorrow {
-  color: var(--main-color-red);
-  font-weight: var(--semibold);
+  color: var(--main-color-red) !important;
+  font-weight: var(--semibold) !important;
 }
 
 /* MODAL DESTINATION POP UP */
@@ -637,9 +657,20 @@ section {
   height: 100%;
   width: 100%;
   display: flex;
-  padding: 145px 10px 0px;
+  padding: 125px 10px 50px;
   justify-content: center;
   background: var(--white-background);
+}
+
+.error_booking_bus {
+  display: none;
+  justify-content: center;
+  font-size: 0.7rem;
+  padding: 50px 0px;
+}
+
+.error_booking_bus h1 {
+  text-align: center;
 }
 
 .booking_bus_list_con ul {
@@ -2048,32 +2079,9 @@ footer {
   }
 
   .booking_bus_list_con {
-    padding: 125px 10px 0px;
+    padding: 100px 10px 50px;
   }
 
-  @media (max-height: 1000px) {
-    .booking_bus_list_con {
-      padding: 135px 10px 0px;
-    }
-  }
-
-  @media (max-height: 860px) {
-    .booking_bus_list_con {
-      padding: 145px 10px 0px;
-    }
-  }
-
-  @media (max-height: 760px) {
-    .booking_bus_list_con {
-      padding: 155px 10px 0px;
-    }
-  }
-
-  @media (max-height: 715px) {
-    .booking_bus_list_con {
-      padding: 165px 10px 0px;
-    }
-  }
 }
 
 /* PHONES */
@@ -2117,40 +2125,8 @@ footer {
     margin: 0px 0px 0px 10px;
   }
 
-  @media (max-height: 1000px) {
-    .booking_bus_list_con {
-      padding: 110px 10px 0px;
-    }
-  }
-
-  @media (max-height: 860px) {
-    .booking_bus_list_con {
-      padding: 120px 10px 0px;
-    }
-  }
-
-  @media (max-height: 760px) {
-    .booking_bus_list_con {
-      padding: 135px 10px 0px;
-    }
-  }
-
-  @media (max-height: 715px) {
-    .booking_bus_list_con {
-      padding: 140px 10px 0px;
-    }
-  }
-
-  @media (max-height: 700px) {
-    .booking_bus_list_con {
-      padding: 165px 10px 0px;
-    }
-  }
-
-  @media (max-height: 600px) {
-    .booking_bus_list_con {
-      padding: 175px 10px 0px;
-    }
+  .booking_bus_list_con {
+    padding: 75px 10px 40px;
   }
 
   .booking_bus_list {
@@ -2184,29 +2160,6 @@ footer {
 @media (max-width: 600px) {
 
   /* BOOKING */
-  @media (max-height: 1000px) {
-    .booking_bus_list_con {
-      padding: 60px 10px 0px;
-    }
-  }
-
-  @media (max-height: 830px) {
-    .booking_bus_list_con {
-      padding: 80px 10px 0px;
-    }
-  }
-
-  @media (max-height: 710px) {
-    .booking_bus_list_con {
-      padding: 95px 10px 0px;
-    }
-  }
-
-  @media (max-height: 625px) {
-    .booking_bus_list_con {
-      padding: 125px 10px 0px;
-    }
-  }
 
   #laptopTabletBookingList {
     display: none;
@@ -2284,30 +2237,6 @@ footer {
     margin: 0px 10px;
   }
 
-  @media (max-height: 1000px) {
-    .booking_bus_list_con {
-      padding: 60px 10px 0px;
-    }
-  }
-
-  @media (max-height: 830px) {
-    .booking_bus_list_con {
-      padding: 80px 10px 0px;
-    }
-  }
-
-  @media (max-height: 710px) {
-    .booking_bus_list_con {
-      padding: 95px 10px 0px;
-    }
-  }
-
-  @media (max-height: 625px) {
-    .booking_bus_list_con {
-      padding: 125px 10px 0px;
-    }
-  }
-
   .booking_modal_con {
     width: 450px;
   }
@@ -2349,30 +2278,6 @@ footer {
 
   .booking_modal_con {
     width: 400px;
-  }
-
-  @media (max-height: 1000px) {
-    .booking_bus_list_con {
-      padding: 80px 10px 0px;
-    }
-  }
-
-  @media (max-height: 830px) {
-    .booking_bus_list_con {
-      padding: 100px 10px 0px;
-    }
-  }
-
-  @media (max-height: 710px) {
-    .booking_bus_list_con {
-      padding: 115px 10px 0px;
-    }
-  }
-
-  @media (max-height: 625px) {
-    .booking_bus_list_con {
-      padding: 135px 10px 0px;
-    }
   }
 
   /* ITINERARY */
@@ -2447,10 +2352,6 @@ footer {
     top: 50px;
   }
 
-  .booking_bus_list_con {
-    padding: 115px 10px 0px;
-  }
-
   .booking_modal_con {
     width: 370px;
     font-size: 0.9rem;
@@ -2479,36 +2380,6 @@ footer {
 
   .date_con {
     font-size: 0.85em;
-  }
-
-  @media (max-height: 1000px) {
-    .booking_bus_list_con {
-      padding: 35px 10px 0px;
-    }
-  }
-
-  @media (max-height: 880px) {
-    .booking_bus_list_con {
-      padding: 55px 10px 0px;
-    }
-  }
-
-  @media (max-height: 770px) {
-    .booking_bus_list_con {
-      padding: 65px 10px 0px;
-    }
-  }
-
-  @media (max-height: 740px) {
-    .booking_bus_list_con {
-      padding: 75px 10px 0px;
-    }
-  }
-
-  @media (max-height: 670px) {
-    .booking_bus_list_con {
-      padding: 95px 10px 0px;
-    }
   }
 
   .booking_info_bus_logo {

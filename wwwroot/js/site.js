@@ -50,27 +50,57 @@ if (destinationInput) {
         destinationInput.textContent = locationName;
     });
 
+    // DATE TODAY
+    const todayDate = new Date();
+    const tomorrowDate = new Date();
+    tomorrowDate.setDate(todayDate.getDate() + 1);
+
+    // TODAY AND TOMORROW
+    const today = todayDate.toISOString().split("T")[0];
+    const tomorrow = tomorrowDate.toISOString().split("T")[0];
+    let datePicked;
+
+    // DESTINATION VARIABLE GLOBAL  
+    let destination = destinationInput.textContent;
+
+    // REDIRECT FUNCTION
+    function bookRequest(tripId) {
+        fetch("/Home/RedirectToItinerary", {
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({ TripId: tripId })
+        }).then(response => response.json())
+        .then(data => {
+            window.location.href = data.redirectUrl;
+        })
+        .catch(err => console.error(err));
+    }
 
     // TRANSFER DESTINATION DATA TO THE HIDDEN INPUT
-
     const checkTripsBtn = document.getElementById("checkTripsBtn");
     checkTripsBtn.addEventListener("click", (e) => {
         e.preventDefault();
 
-        const destination = destinationInput.textContent;
-        console.log(destination)
+        destination = destinationInput.textContent;
 
-        fetch ("/Home/CheckDestination", {
+        fetch ("/Home/CheckTrip", {
             method: "POST",
             headers: { "Content-Type": "application/json"},
-            body: JSON.stringify({ Destination: destination})
+            body: JSON.stringify({ TripDate: datePicked, Destination: destination })
         }).then(response => response.json())
         .then(data => {
+            console.log("CHECK TRIP Destination: ", destination, " Trip Date: ", today);
             console.log("Server response: ", data);
 
             // DATE TIME FUNCTION
-            function formatTime(dateTime) {
+            function formatDateTime(dateTime) {
                 return new Date(dateTime).toLocaleTimeString([], { timeStyle: "short" });
+            }
+
+            function formatTime(time) {
+                const [hours, min] = time.split(":");
+
+                return `${parseInt(hours)}h ${parseInt(min)}min`;
             }
 
             // DISPLAY DATA TO BOOKING
@@ -88,7 +118,7 @@ if (destinationInput) {
                         <div class="booking_info_con">
                             <div class="booking_info">
                                 <div class="booking_info_departure">
-                                    <p class="time">${formatTime(trip.departureTime)}</p>
+                                    <p class="time">${formatDateTime(trip.departureTime)}</p>
                                     <p>Paranaque Integrated Terminal Exchange</p>
                                 </div>
 
@@ -102,12 +132,12 @@ if (destinationInput) {
                                     </div>
 
                                     <div class="trip_info">
-                                        <p>${trip.totalTripTime} | ${trip.operator} | Bus | <span>${trip.type}</span></p>
+                                        <p>${formatTime(trip.totalTripTime)} | ${trip.operator} | Bus | <span>${trip.type}</span></p>
                                     </div>
                                 </div>
 
                                 <div class="booking_info_destination">
-                                    <p class="time">${formatTime(trip.arrivalTime)}</p>
+                                    <p class="time">${formatDateTime(trip.arrivalTime)}</p>
                                     <p>${trip.destination}</p>
                                 </div>
                             </div>
@@ -132,7 +162,7 @@ if (destinationInput) {
                             </div>
                             
                             <div class="bus_trip_book_btn_con">
-                                <button>Book Now!</button>
+                                <button class="book_btn" data-id="${trip.tripId}">Book Now!</button>
                             </div>
                         </div>  
                     </div>
@@ -146,159 +176,175 @@ if (destinationInput) {
         })
         .catch(err => console.error(err));
     });
-}
 
-// CHECK IF PAGE IS PAYMENT AND CHANGE BUTTON TO REDIRECT USER TO THE PAYMENT GATEWAY
-const page = document.getElementById("page");
-const receipt = "receipt";
-const payment = "payment";
+    // MODAL DATE
+    const bookingModalDateCon = document.querySelector(".booking_modal_date_con");
 
-const bookingBtnCon = document.getElementById("bookingBtnCon");
-const nextBtn = document.getElementById("nextBtn");
-const payBtn = document.getElementById("payBtn");
-const homeBtn = document.getElementById("homeBtn");
+    function calendarBuilder(date) {
+        bookingModalDateCon.innerHTML = "";
+        for (let i = 0; i <7; i++) {
+            const d = new Date(date);
+            d.setDate(date.getDate() + i);
+            
+            const dISO = d.toISOString().split("T")[0];
+        
+            const li  = document.createElement("li");
+            li.setAttribute("data-date", dISO);
+            
+            const btn = document.createElement("button");
+            const weekday = d.toLocaleDateString(undefined, { weekday: "short" }); 
+            const dayMonth = d.toLocaleDateString(undefined, { day: "numeric", month: "short"});
 
-const totalCon = document.getElementById("totalCon");
-if (page) {   
-    if (page.textContent.toLowerCase() === "payment") {
-        console.log("To payment gateway");
-        nextBtn.classList.add("inactiveBtn");
-        payBtn.classList.add("activeBtn");
-        payBtn.classList.remove("inactiveBtn");
-        homeBtn.classList.add("inactiveBtn");
-    } else if (page.textContent.toLowerCase() === "receipt") {
-        console.log("to home");
-        nextBtn.classList.add("inactiveBtn");
-        payBtn.classList.add("inactiveBtn");
-        homeBtn.classList.add("activeBtn");
-        homeBtn.classList.remove("inactiveBtn");
+            btn.innerHTML = `
+                <div class="date_con">
+                    <p>${weekday}</p>
+                    <p>${dayMonth}</p>
+                </div>
+            `;
 
-        totalCon.classList.add("hide");
-        bookingBtnCon.classList.add("setPaddingBtn");
-    } else {
-        console.log("next");
-        nextBtn.classList.add("activeBtn");
-        nextBtn.classList.remove("inactiveBtn");
-        payBtn.classList.add("inactiveBtn");
-        homeBtn.classList.add("inactiveBtn");
+            if (dISO === today)  {
+                btn.classList.add("today", "chosen");
+                btn.textContent = "Today";
+            } 
+
+            if (dISO === tomorrow) {
+                btn.classList.add("tomorrow");
+                btn.textContent = "Tomorrow";
+            }
+
+            btn.addEventListener("click", () => {
+                selectDate(d);
+
+                bookingModalDateCon.querySelectorAll("button").forEach(b => {
+                    b.classList.remove("chosen");
+                });
+
+                btn.classList.add("chosen");
+            });
+
+            li.appendChild(btn);
+            bookingModalDateCon.appendChild(li);
+        }
     }
 
-    // POP UP
-    const popUpCon = document.getElementById("popUpCon");
-    const closeBtn = document.getElementById("closeBtn");
+    function selectDate(date) {
+        datePicked = date.toISOString().split("T")[0];
 
-    // PASSENGER POP UP
-    let passengerPopUp;
-    let passengerPopUpDoneBtn;
-    let insurancePopUp;
+        const errorBookingBus = document.querySelector(".error_booking_bus");
+        console.log("date picked: ", datePicked, " today: ", today);
+        if (datePicked == today) {
+            errorBookingBus.classList.add("show");
+        } else {
+            errorBookingBus.classList.remove("show");
+        }
 
-    // BUS POP UP
-    let busPicInsidePopUp;
-    let busPicOutsidePopUp;
+        // METHOD POST TO BACK-END AND UPDATE THE LIST BASED ON THE DATE
+        fetch("/Home/CheckTrip", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ TripDate: datePicked, Destination: destination })
+        }).then(response => response.json())
+        .then(data => {
+            console.log("DATE SELECTION select date: ", datePicked, " Destination: ", destination);
+            console.log("Server response :", data);
 
-    // RECEIPT POP UP
-    let receiptPopUp;
-    let successPayPopUp;
+            // PUT THE UPDATED LIST HERE
+            // DATE TIME FUNCTION
+            function formatDateTime(dateTime) {
+                return new Date(dateTime).toLocaleTimeString([], { timeStyle: "short" });
+            }
 
+            function formatTime(time) {
+                const [hours, min] = time.split(":");
 
-        // ITINERARY
-        if (page.textContent.toLowerCase() === "itinerary") {
+                return `${parseInt(hours)}h ${parseInt(min)}min`;
+            }
 
-            //  PASSENGER POP UP
-            const passengerInput = document.getElementById("passengerInput");
+            // DISPLAY DATA TO BOOKING
+            const bookingBusTripList = document.querySelectorAll(".booking_bus_trip_list");
+            bookingBusTripList.forEach(list => {
+                list.innerHTML = "";
+            });
 
-            passengerInput.addEventListener("click", () => {
-                passengerPopUp = document.getElementById("passengerPopUp");
+            data.forEach(trip => {
+                const li = document.createElement("li");
 
-                passengerPopUp.classList.toggle("show");
+                li.innerHTML = 
+                `
+                    <div class="booking_bus_list">
+                        <div class="booking_info_con">
+                            <div class="booking_info">
+                                <div class="booking_info_departure">
+                                    <p class="time">${formatDateTime(trip.departureTime)}</p>
+                                    <p>Paranaque Integrated Terminal Exchange</p>
+                                </div>
 
-                // DONE BTN
-                passengerPopUpDoneBtn = document.getElementById("passengerPopUpDoneBtn");
+                                <div class="booking_info_bus_info">
+                                    <div class="booking_info_bus_logo">
+                                        <img src="${trip.busLogo}" alt="dltbLogo">
+                                    </div>
 
-                passengerPopUpDoneBtn.addEventListener("click", () => {
-                    passengerPopUp.classList.remove("show");
+                                    <div class="booking_info_bus_icon">
+                                        <img src="/icons/bus.svg" alt="bus">
+                                    </div>
+
+                                    <div class="trip_info">
+                                        <p>${formatTime(trip.totalTripTime)} | ${trip.operator} | Bus | <span>${trip.type}</span></p>
+                                    </div>
+                                </div>
+
+                                <div class="booking_info_destination">
+                                    <p class="time">${formatDateTime(trip.arrivalTime)}</p>
+                                    <p>${trip.destination}</p>
+                                </div>
+                            </div>
+
+                            <div class="bus_pic_con">
+                                <div class="busPic" id="busInsideBookingList">
+                                    <img src="${trip.imgInside}" alt="insideBus">
+                                </div>
+
+                                <div class="busPic" id="busOutsideBookingList">
+                                    <img src="${trip.imgOutside}" alt="bus">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="redLine"></div>
+
+                        <div class="booking_price_con">
+                            <div class="booking_price_con_info"> 
+                                <p class="price">₱${Number(trip.price).toLocaleString("en-US")}</p>
+                                <p>Taxes Included | per adult</p>
+                            </div>
+                            
+                            <div class="bus_trip_book_btn_con">
+                                <button class="book_btn" data-id="${trip.tripId}">Book Now!</button>
+                            </div>
+                        </div>  
+                    </div>
+                `;
+
+                bookingBusTripList.forEach(list => {
+                    list.appendChild(li.cloneNode(true));
                 });
             });
 
+        })
+        .catch(err => console.error("Error:", err));
 
-            // BUS PIC
-            const busInside = document.getElementById("busInside");
-            const busOutside = document.getElementById("busOutside");
+        console.log("Chosen Date: ", datePicked);
+    }
 
-            
-            busInside.addEventListener("click", () => {
-                popUpCon.classList.toggle("show");
-                busPicInsidePopUp = document.getElementById("busPicInsidePopUp");
+    calendarBuilder(todayDate);
 
-                busPicInsidePopUp.classList.toggle("show");
-            });
-
-            busOutside.addEventListener("click", () => {
-                popUpCon.classList.toggle("show");
-                busPicOutsidePopUp = document.getElementById("busPicOutsidePopUp");
-
-                busPicOutsidePopUp.classList.toggle("show");
-            });
-        }
-
-        // PASSENGERS
-        if (page.textContent.toLowerCase() === "passengers") {
-            const insuranceBtn = document.getElementById("insuranceBtn");
-            
-            insurancePopUp = document.getElementById("insurancePopUp");
-            insuranceBtn.addEventListener("click", () => {
-
-                insurancePopUp.classList.toggle("show");
-            });
-            
-            insurancePopUp.addEventListener("click", (e) => {
-                if (e.target != insurancePopUp) {
-                    insurancePopUp.classList.remove("show");
-                }
-            });
-        }
-
-        // SUCCESS PAYMENT
-        if (page.textContent.toLowerCase() === "receipt") {
-            popUpCon.classList.toggle("show");
-            successPayPopUp = document.getElementById("successPayPopUp");
-
-            successPayPopUp.classList.toggle("show");
-        }
-
-        // QR
-        if (page.textContent.toLowerCase() === "receipt") {
-            const qrCode = document.getElementById("qrCode");
-
-            qrCode.addEventListener("click", () => {
-                receiptPopUp = document.getElementById("receiptPopUp");
-
-                popUpCon.classList.toggle("show");
-                receiptPopUp.classList.toggle("show");
-            });
-        }
-
-
-    // CLOSE FUNCTION
-    closeBtn.addEventListener("click", () => {
-        popUpCon.classList.remove("show");
-
-        if (page.textContent.toLowerCase() === "receipt") {
-            successPayPopUp.classList.remove("show");
-            receiptPopUp.classList.remove("show");
-        }
-    });
-
-    popUpCon.addEventListener("click", () => {
-        popUpCon.classList.remove("show");
-        if (page.textContent.toLowerCase() === "itinerary") {  
-            busPicInsidePopUp.classList.remove("show");
-            busPicOutsidePopUp.classList.remove("show");
-        }
-
-        if (page.textContent.toLowerCase() === "receipt") {
-            successPayPopUp.classList.remove("show");
-            receiptPopUp.classList.remove("show");
+    document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("book_btn")) {
+            console.log("Book btn clicked");
+            const tripId = e.target.dataset.id;
+            bookRequest(tripId);
         }
     });
 }

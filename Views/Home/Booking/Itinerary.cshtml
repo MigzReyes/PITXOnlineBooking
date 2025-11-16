@@ -175,7 +175,7 @@
     <div class="total_con" id="totalCon">
         <div class="total">
             <p><span>Total</span></p>
-            <p>₱1000 @*ViewBag.TripJson.Price*@</p>
+            <p>₱<span id="totalPrice"></span></p>
         </div>
 
         <div class="subtotal">    
@@ -192,11 +192,12 @@
     </div>
 
     <div class="booking_btn_con" id="bookingBtnCon">
-        <button id="nextBtn" onclick="location.href=`@Url.Action((string)@ViewBag.Page, "Home")`">Next</button>
+        <button id="nextBtn">Next</button>
     </div>
 </div>
 
 <div id="bookingData" data-trip='@Html.Raw(Json.Serialize(ViewBag.TripJson))'></div>
+<div id="insuranceData" data-trip='@Html.Raw(Json.Serialize(ViewBag.InsuranceJson))'></div>
 
 @section PopUpCon {
     <!-- BUS PIC -->
@@ -208,7 +209,3 @@
         <img src="@ViewBag.TripJson.ImgOutside" alt="bus">
     </div>
 }
-
-<script>
-
-</script>

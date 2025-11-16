@@ -36,7 +36,6 @@ public class HomeController : Controller
     public IActionResult Itinerary(int tripId)
     {
         ViewBag.Title = "Itinerary";
-        ViewBag.Page = "Passengers";
 
         Console.WriteLine("Trip Id: " + tripId);
         var trip = (from trips in _context.Trip join bus in _context.Bus on trips.BusTripId equals bus.Id where trips.Id == tripId select new
@@ -60,7 +59,10 @@ public class HomeController : Controller
         }).AsNoTracking()
         .FirstOrDefault();
 
+        var insurance = _context.Insurance.AsNoTracking().ToList();
+
         ViewBag.TripJson = trip;
+        ViewBag.InsuranceJson = insurance;
 
         return View("Booking/Itinerary");
     }
@@ -68,21 +70,18 @@ public class HomeController : Controller
     public IActionResult Passengers()
     {
         ViewBag.Title = "Passengers";
-        ViewBag.Page = "Confirmation";
         return View("Booking/Passengers");
     }
 
     public IActionResult Confirmation()
     {
         ViewBag.Title = "Confirmation";
-        ViewBag.Page = "Payment";
         return View("Booking/Confirmation");
     }
 
     public IActionResult Payment()
     {
         ViewBag.Title = "Payment";
-        ViewBag.Page = "Receipt";
         return View("Booking/Payment");
     }
 

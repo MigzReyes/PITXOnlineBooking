@@ -156,7 +156,9 @@ TICKET FORMAT
 
 						How do you display the data from the JSON object to the front-page without using the .innerHTML??
 
-						How do I send the JSON objecto to the next page?
+						How do I send the JSON objecto to the next page? Using session storage
+
+						Should I put all of the insurance data inside the trip json in the itinerary action????
  
 
 Buses Trip hours

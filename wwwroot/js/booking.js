@@ -10,7 +10,32 @@ const homeBtn = document.getElementById("homeBtn");
 
 const totalCon = document.getElementById("totalCon");
 
-const passengerJson = {};
+const bookedTripJson = {
+    passengerNo: {
+        adults: undefined,
+        children: undefined,
+        infants: undefined,
+    },
+    user: {
+        email: undefined,
+        mobile: undefined,
+        firstName: undefined,
+        lastName: undefined,
+        ageGroup: undefined,
+        birthDate: undefined,
+        passengers: {
+            id: undefined,
+            firstName: undefined,
+            lastName: undefined,
+            ageGroup: undefined,
+            birthDate: undefined
+        }   
+    },
+    insuranceType: undefined,
+    totalPrice: undefined,
+    paymentMethod: undefined,
+    ticketNo: undefined // AUTOMATICALLY CREATE THIS AFTER SUCCESSFUL PAYMENT
+};
 
 if (page) {   
 
@@ -39,35 +64,28 @@ if (page) {
             //  PASSENGER POP UP
             const passengerInput = document.getElementById("passengerInput");
 
+            // ADD PASSENGER   
+            const subAdult = document.getElementById("subAdult");
+            const subChild = document.getElementById("subChild"); 
+            const subInfant = document.getElementById("subInfant");
+            const addAdult = document.getElementById("addAdult");
+            const addChild = document.getElementById("addChild");
+            const addInfant = document.getElementById("addInfant");
+
+            const noOfPassenger = document.querySelectorAll(".noOfPassenger");
+            const noOfAdults = document.getElementById("noOfAdults");
+            const noOfChild = document.getElementById("noOfChild");
+            const noOfInfant = document.getElementById("noOfInfant");
+
+            let adult = 1;
+            let child = 0;
+            let infant = 0;
+
             passengerInput.addEventListener("click", () => {
                 passengerPopUp = document.getElementById("passengerPopUp");
 
                 passengerPopUp.classList.toggle("show");
 
-                // ADD PASSENGER   
-                const subAdult = document.getElementById("subAdult");
-                const subChild = document.getElementById("subChild"); 
-                const subInfant = document.getElementById("subInfant");
-                const addAdult = document.getElementById("addAdult");
-                const addChild = document.getElementById("addChild");
-                const addInfant = document.getElementById("addInfant");
-
-                const noOfPassenger = document.querySelectorAll(".noOfPassenger");
-                const noOfAdults = document.getElementById("noOfAdults");
-                const noOfChild = document.getElementById("noOfChild");
-                const noOfInfant = document.getElementById("noOfInfant");
-
-                let adult = 1;
-                let child = 0;
-                let infant = 0;
-
-                function updateDisplay() {
-                    const passenger = adult + child + infant;
-
-                    noOfPassenger.forEach(span => {
-                        span.textContent = passenger.toLocaleString();
-                    })
-                }
 
                 subAdult.addEventListener("click", () => {
                     if (adult > 1) {
@@ -140,21 +158,67 @@ if (page) {
                 busPicOutsidePopUp.classList.toggle("show");
             });
 
+            // INSURANCE JSON
+            const insuranceData = document.getElementById("insuranceData");
+            let insurance = JSON.parse(insuranceData.dataset.trip);
+            console.log(insurance); // REMOVE THIS
+
+            // TRIP JSON
             const bookingData = document.getElementById("bookingData");
-            const trip = JSON.parse(bookingData.dataset.trip);
-            console.log(trip);
+            let trip = JSON.parse(bookingData.dataset.trip);
+            console.log(trip); // REMOVE THIS
+            
+            // CALCULATE TOTAL
+            // USE PACKAGE C - 148 PESOS       
+            console.log("Package: ", insurance.Id = 3); // REMOVE THIS
+            const totalPrice = document.getElementById("totalPrice");
+            let price;
+
+            const selectedInsurance = insurance.find(i => i.id === 3);
+
+            // DEFAULT INSURANCE PACKAGE C - 148 PESOS
+            totalPrice.textContent = selectedInsurance.price + trip.price + 6;
+
+            function updateDisplay() {
+                let passenger = adult + child + infant;
+
+                noOfPassenger.forEach(span => {
+                    span.textContent = passenger.toLocaleString();
+                })
+
+                price = passenger * (trip.price + selectedInsurance.price + 6);
+
+                // TOTAL PRICE CALCULATION
+                console.log("total price: ", price);
+                totalPrice.textContent = price;
+            }
 
             const bookingMainCon = document.querySelector(".booking_main_con");
             bookingMainCon.classList.toggle('inactive');
 
             nextBtn.addEventListener("click", () => {
+                bookedTripJson.passengerNo.adults = adult;
+                bookedTripJson.passengerNo.children = child;
+                bookedTripJson.passengerNo.infants = infant;
+                bookedTripJson.totalPrice = price;
 
-                
+                // TRIP JSON
+                trip.bookedTripJson = bookedTripJson;
+                console.log(trip); // REMOVE THIS
+                sessionStorage.setItem("bookedTripJson", JSON.stringify(trip));
+
+                window.location.href = "/Home/Passengers"
             });
         }
 
         // PASSENGERS
         if (page.textContent.toLowerCase() === "passengers") {
+            console.log("this is passengers");
+
+            // GET BOOKED TRIP JSON
+            const trip = JSON.parse(sessionStorage.getItem("bookedTripJson"));
+            console.log(trip);
+
             const insuranceBtn = document.getElementById("insuranceBtn");
             
             insurancePopUp = document.getElementById("insurancePopUp");

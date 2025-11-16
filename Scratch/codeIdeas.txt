@@ -145,6 +145,18 @@ TICKET FORMAT
 
 						In the book now btn, create a post reqquest to the back-end, while also sending the tripId, and redirect the user to the	
 						booking process, the using the tripId get the data from the database. 
+
+						Use the ViewBag to display the data 
+
+						And cache the json
+
+
+						In the itinerary section it will call the database and store the data in a JSON Object to be reused in the 
+						next section to avoid re-calling the database.
+
+						How do you display the data from the JSON object to the front-page without using the .innerHTML??
+
+						How do I send the JSON objecto to the next page?
  
 
 Buses Trip hours

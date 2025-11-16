@@ -77,7 +77,6 @@ public class HomeController : Controller
         ViewBag.Title = "Confirmation";
         ViewBag.Page = "Payment";
         return View("Booking/Confirmation");
-
     }
 
     public IActionResult Payment()

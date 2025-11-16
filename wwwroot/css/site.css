@@ -748,6 +748,7 @@ section {
 
 .time {
   font-weight: var(--semibold);
+  min-width: 42px;
 }
 
 .booking_info_destination {
@@ -849,8 +850,7 @@ section {
 }
 
 .booking_main_con {
-  padding: 20px;
-  overflow-y: auto;
+  overflow: auto;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -866,6 +866,8 @@ section {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  padding: 20px;
+  overflow-y: auto;
 }
 
 .how_many_pass_con {
@@ -1026,7 +1028,7 @@ section {
 .itinerary_trip_time {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
   padding-left: 10px;
 }
 
@@ -1036,7 +1038,7 @@ section {
 }
 
 .itinerary_bus_icon {
-  width: 30px;
+  width: 27px;
   display: flex;
   align-items: center;
 }
@@ -1058,8 +1060,8 @@ section {
 
 .itinerary_bus_img_con {
   display: flex;
-  gap: 100px;
-  padding: 0px 50px;
+  gap: 50px;
+  padding: 0px 20px;
 }
 
 .bus_logo_con {
@@ -1067,16 +1069,17 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 100%;
 }
 
 .itinerary_bus_logo {
-  width: 45px;
+  width: 35px;
 }
 
 .bus_logo_con p {
   font-weight: bold;
   font-size: 0.95rem;
+  text-align: center;
 }
 
 .itinerary_bus_pic_con {
@@ -1085,10 +1088,6 @@ section {
   justify-content: center;
   width: 100%;
   gap: 5px;
-}
-
-.itinerary_bus_pic_con .busPic {
-  width: 135px;
 }
 
 .itinerary_bus_provides_con {
@@ -1152,6 +1151,7 @@ section {
 
 
 .booking_bot {
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin-top: auto;
@@ -1211,9 +1211,10 @@ section {
 .passengers {
   height: 100%;
   display: flex;
+  overflow-y: auto;
   flex-direction: column;
   gap: 15px;
-  padding-bottom: 10px;
+  padding: 20px;
 }
 
 .booking_summary_con {
@@ -1554,6 +1555,8 @@ section {
 .confirmation {
   display: flex;
   flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
 }
 
 .passenger_list {
@@ -1595,6 +1598,8 @@ section {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding: 20px;
+  overflow: auto;
 }
 
 .payment_con {
@@ -1693,6 +1698,8 @@ input[type="radio"] {
   flex-direction: column;
   height: 100%;
   gap: 10px;
+  overflow-y: auto;
+  padding: 20px;
 }
 
 .receipt_top_con {
@@ -2052,6 +2059,10 @@ footer {
 }
 
 /* BUS PIC */
+.busPic_popUp {
+  width: 400px;
+}
+
 .busPic_popUp.inside {
   display: none;
 }
@@ -2251,11 +2262,11 @@ footer {
   }
 
   .itinerary_bus_logo {
-    width: 40px;
+    width: 30px;
   }
 
   .itinerary_bus_icon {
-    width: 25px;
+    width: 22px;
   }
 }
 
@@ -2282,18 +2293,10 @@ footer {
 
   /* ITINERARY */
   .itinerary_bus_img_con {
-    gap: 55px;
+    gap: 10px;
   }
 
   .itinerary_bus_logo {
-    width: 30px;
-  }
-
-  .itinerary_bus_pic_con .busPic {
-    width: 110px;
-  }
-
-  .itinerary_bus_icon {
     width: 20px;
   }
 
@@ -2421,12 +2424,16 @@ footer {
 
   /* ITINERARY */
   .itinerary_bus_img_con {
-    gap: 30px;
     padding: 0px 5px;
   }
 
   .itinerary_bus_pic_con .busPic {
     width: 100px;
+  }
+
+  .busPic img {
+    width: 100%;
+    height: auto;
   }
 
   .busPic_popUp {

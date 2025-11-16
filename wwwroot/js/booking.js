@@ -3,38 +3,16 @@ console.log("Booking process");
 
 // CHECK IF PAGE IS PAYMENT AND CHANGE BUTTON TO REDIRECT USER TO THE PAYMENT GATEWAY
 const page = document.getElementById("page");
-const receipt = "receipt";
-const payment = "payment";
 
-const bookingBtnCon = document.getElementById("bookingBtnCon");
 const nextBtn = document.getElementById("nextBtn");
 const payBtn = document.getElementById("payBtn");
 const homeBtn = document.getElementById("homeBtn");
 
 const totalCon = document.getElementById("totalCon");
-if (page) {   
-    if (page.textContent.toLowerCase() === "payment") {
-        console.log("To payment gateway");
-        nextBtn.classList.add("inactiveBtn");
-        payBtn.classList.add("activeBtn");
-        payBtn.classList.remove("inactiveBtn");
-        homeBtn.classList.add("inactiveBtn");
-    } else if (page.textContent.toLowerCase() === "receipt") {
-        console.log("to home");
-        nextBtn.classList.add("inactiveBtn");
-        payBtn.classList.add("inactiveBtn");
-        homeBtn.classList.add("activeBtn");
-        homeBtn.classList.remove("inactiveBtn");
 
-        totalCon.classList.add("hide");
-        bookingBtnCon.classList.add("setPaddingBtn");
-    } else {
-        console.log("next");
-        nextBtn.classList.add("activeBtn");
-        nextBtn.classList.remove("inactiveBtn");
-        payBtn.classList.add("inactiveBtn");
-        homeBtn.classList.add("inactiveBtn");
-    }
+const passengerJson = {};
+
+if (page) {   
 
     // POP UP
     const popUpCon = document.getElementById("popUpCon");
@@ -56,7 +34,7 @@ if (page) {
 
         // ITINERARY
         if (page.textContent.toLowerCase() === "itinerary") {
-
+            console.log("this is itinerary page");
 
             //  PASSENGER POP UP
             const passengerInput = document.getElementById("passengerInput");
@@ -65,6 +43,74 @@ if (page) {
                 passengerPopUp = document.getElementById("passengerPopUp");
 
                 passengerPopUp.classList.toggle("show");
+
+                // ADD PASSENGER   
+                const subAdult = document.getElementById("subAdult");
+                const subChild = document.getElementById("subChild"); 
+                const subInfant = document.getElementById("subInfant");
+                const addAdult = document.getElementById("addAdult");
+                const addChild = document.getElementById("addChild");
+                const addInfant = document.getElementById("addInfant");
+
+                const noOfPassenger = document.querySelectorAll(".noOfPassenger");
+                const noOfAdults = document.getElementById("noOfAdults");
+                const noOfChild = document.getElementById("noOfChild");
+                const noOfInfant = document.getElementById("noOfInfant");
+
+                let adult = 1;
+                let child = 0;
+                let infant = 0;
+
+                function updateDisplay() {
+                    const passenger = adult + child + infant;
+
+                    noOfPassenger.forEach(span => {
+                        span.textContent = passenger.toLocaleString();
+                    })
+                }
+
+                subAdult.addEventListener("click", () => {
+                    if (adult > 1) {
+                        adult--;
+                        noOfAdults.textContent = adult.toLocaleString();
+                        updateDisplay();
+                    }
+                });
+
+                addAdult.addEventListener("click", () => {
+                    adult++;
+                    noOfAdults.textContent = adult.toLocaleString();
+                    updateDisplay();
+                });
+
+                subChild.addEventListener("click", () => {
+                    if (child > 0) {
+                        child--;
+                        noOfChild.textContent = child.toLocaleString();
+                        updateDisplay();
+                    }
+                });
+
+                addChild.addEventListener("click", () => {
+                    child++;
+                    noOfChild.textContent = child.toLocaleString();
+                    updateDisplay();
+                });
+
+                subInfant.addEventListener("click", () => {
+                    if (infant > 0) {
+                        infant--;
+                        noOfInfant.textContent = infant.toLocaleString();
+                        updateDisplay();
+                    }
+                });
+
+                addInfant.addEventListener("click", () => {
+                    infant++;
+                    noOfInfant.textContent = infant.toLocaleString();
+                    updateDisplay();
+                });
+
 
                 // DONE BTN
                 passengerPopUpDoneBtn = document.getElementById("passengerPopUpDoneBtn");
@@ -93,6 +139,18 @@ if (page) {
 
                 busPicOutsidePopUp.classList.toggle("show");
             });
+
+            const bookingData = document.getElementById("bookingData");
+            const trip = JSON.parse(bookingData.dataset.trip);
+            console.log(trip);
+
+            const bookingMainCon = document.querySelector(".booking_main_con");
+            bookingMainCon.classList.toggle('inactive');
+
+            nextBtn.addEventListener("click", () => {
+
+                
+            });
         }
 
         // PASSENGERS
@@ -114,14 +172,15 @@ if (page) {
 
         // SUCCESS PAYMENT
         if (page.textContent.toLowerCase() === "receipt") {
+
+            // SUCCESS POP UP
             popUpCon.classList.toggle("show");
             successPayPopUp = document.getElementById("successPayPopUp");
 
             successPayPopUp.classList.toggle("show");
-        }
 
-        // QR
-        if (page.textContent.toLowerCase() === "receipt") {
+
+            // QR CODE
             const qrCode = document.getElementById("qrCode");
 
             qrCode.addEventListener("click", () => {
@@ -130,18 +189,22 @@ if (page) {
                 popUpCon.classList.toggle("show");
                 receiptPopUp.classList.toggle("show");
             });
+
+            // CLOSE FUNCTION
+            closeBtn.addEventListener("click", () => {
+                popUpCon.classList.remove("show");
+
+                if (page.textContent.toLowerCase() === "receipt") {
+                    successPayPopUp.classList.remove("show");
+                    receiptPopUp.classList.remove("show");
+                }
+            });
         }
 
-
-    // CLOSE FUNCTION
-    closeBtn.addEventListener("click", () => {
-        popUpCon.classList.remove("show");
-
+        // QR
         if (page.textContent.toLowerCase() === "receipt") {
-            successPayPopUp.classList.remove("show");
-            receiptPopUp.classList.remove("show");
         }
-    });
+
 
     popUpCon.addEventListener("click", () => {
         popUpCon.classList.remove("show");

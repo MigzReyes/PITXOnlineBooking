@@ -13,6 +13,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// DELETES OLD TRIPS
+builder.Services.AddHostedService<BookingTripCleanupService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -164,3 +164,28 @@
     </div>
 
 </div>
+
+<div class="booking_bot">
+    <div class="total_con" id="totalCon">
+        <div class="total">
+            <p><span>Total</span></p>
+            <p>₱1000 @*ViewBag.TripJson.Price*@</p>
+        </div>
+
+        <div class="subtotal">    
+            <div class="insurance">
+                <p>Insurance</p>
+                <p>₱148</p>
+            </div>
+
+            <div class="taxes_and_fees">
+                <p>Taxes and fees</p>
+                <p>₱6</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="booking_btn_con" id="bookingBtnCon">
+        <button id="nextBtn" onclick="location.href=`@Url.Action((string)@ViewBag.Page, "Home")`">Next</button>
+    </div>
+</div>

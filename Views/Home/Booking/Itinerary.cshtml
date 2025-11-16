@@ -14,7 +14,7 @@
                     <div class="pass_icon">
                         <img src="~/icons/user.svg" alt="user">
                     </div>
-                    <p>1 Passenger</p>
+                    <p><span class="noOfPassenger">1</span> Passenger</p>
                 </div>
             </div>
 
@@ -26,13 +26,13 @@
                     </div>
 
                     <div class="counter_con">
-                        <div class="subtract">
+                        <div class="subtract" id="subAdult">
                             <img src="~/icons/subtract.svg" alt="subtract">
                         </div>
 
-                        <p>1</p>
+                        <span id="noOfAdults">1</span>
 
-                        <div class="add">
+                        <div class="add" id="addAdult">
                             <img src="~/icons/add.svg" alt="add">
                         </div>
                     </div>
@@ -45,13 +45,13 @@
                     </div>
 
                     <div class="counter_con">
-                        <div class="subtract">
+                        <div class="subtract" id="subChild">
                             <img src="~/icons/subtract.svg" alt="subtract">
                         </div>
 
-                        <p>1</p>
+                        <span id="noOfChild">0</span>
 
-                        <div class="add">
+                        <div class="add" id="addChild">
                             <img src="~/icons/add.svg" alt="add">
                         </div>
                     </div>
@@ -64,13 +64,13 @@
                     </div>
 
                     <div class="counter_con">
-                        <div class="subtract">
+                        <div class="subtract" id="subInfant">
                             <img src="~/icons/subtract.svg" alt="subtract">
                         </div>
 
-                        <p>1</p>
+                        <span id="noOfInfant">0</span>
 
-                        <div class="add">
+                        <div class="add" id="addInfant">
                             <img src="~/icons/add.svg" alt="add">
                         </div>
                     </div>
@@ -86,51 +86,51 @@
             <div class="pass_icon">
                 <img src="~/icons/user.svg" alt="user">
             </div>
-            <p>1 Passenger</p>
+            <p> <span class="noOfPassenger">1</span>  Passenger</p>
         </div>
     </div>
 
     <div class="itinerary_trip_info">
         <div class="itinerary_trip_info_top">
-            <p>Mon, Nov 3</p>
+            <p>@ViewBag.TripJson.TripDate.ToString("ddd, MMM d")</p>
             <div class="itinerary_trip_info_date">
                 <div class="itinerary_trip_departure">
-                    <p>20:30</p>
-                    <p>Paranaque Integrated Terminal Exchange</p>
+                    <p>@ViewBag.TripJson.DepartureTime.ToString("h:mm tt")</p>
+                    <p>PITX</p>
                 </div>
 
                 <div class="itinerary_trip_time">
                     <div class="itinerary_bus_icon">
                         <img src="~/icons/bus.svg" alt="busIcon">
                     </div>
-                    <p>10h 1m Bus ride with DLTBCo in LazyBoy</p>
+                    <p>@($"{ViewBag.TripJson.TotalTripTime.Hours}h {ViewBag.TripJson.TotalTripTime.Minutes}min") Bus ride with @ViewBag.TripJson.Operator in @ViewBag.TripJson.Type</p>
                 </div>
 
                 <div class="itinerary_trip_destination">
-                    <p>06:30</p>
-                    <p>Legazpi, Grand Central Terminal</p>
+                    <p>@ViewBag.TripJson.ArrivalTime.ToString("h:mm tt")</p>
+                    <p>@ViewBag.TripJson.Destination</p>
                 </div>
             </div>
         </div>
-        <p class="itinerary_arrival_time">Arrives on Tue, Nov 4. Travel Time 10h 1m</p>
+        <p class="itinerary_arrival_time">Arrives on @ViewBag.TripJson.ArrivalTime.ToString("ddd, MMM d"). Travel Time @($"{ViewBag.TripJson.TotalTripTime.Hours}h {ViewBag.TripJson.TotalTripTime.Minutes}min")</p>
     </div>
 
     <div class="itinerary_bus_info">
         <div class="itinerary_bus_img_con">
             <div class="bus_logo_con">
                 <div class="itinerary_bus_logo">
-                    <img src="~/img/bus/dltbco/dltbLogo.png" alt="dltbLogo">
+                    <img src="@ViewBag.TripJson.BusLogo" alt="busLogo">
                 </div> 
-                <p>DLTBCo</p>
+                <p>@ViewBag.TripJson.Operator</p>
             </div>
 
             <div class="itinerary_bus_pic_con">    
                 <div class="busPic" id="busInside">
-                    <img src="~/img/bus/dltbco/insideBus.png" alt="insideBus">
+                    <img src="@ViewBag.TripJson.ImgInside" alt="insideBus">
                 </div>
 
                 <div class="busPic" id="busOutside">
-                    <img src="~/img/bus/dltbco/bus.png" alt="bus">
+                    <img src="@ViewBag.TripJson.ImgOutside" alt="bus">
                 </div>
             </div>
         </div>
@@ -171,15 +171,44 @@
     </div>
 </div>
 
+<div class="booking_bot">
+    <div class="total_con" id="totalCon">
+        <div class="total">
+            <p><span>Total</span></p>
+            <p>₱1000 @*ViewBag.TripJson.Price*@</p>
+        </div>
+
+        <div class="subtotal">    
+            <div class="insurance">
+                <p>Insurance</p>
+                <p>₱148</p>
+            </div>
+
+            <div class="taxes_and_fees">
+                <p>Taxes and fees</p>
+                <p>₱6</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="booking_btn_con" id="bookingBtnCon">
+        <button id="nextBtn" onclick="location.href=`@Url.Action((string)@ViewBag.Page, "Home")`">Next</button>
+    </div>
+</div>
+
+<div id="bookingData" data-trip='@Html.Raw(Json.Serialize(ViewBag.TripJson))'></div>
+
+@section PopUpCon {
+    <!-- BUS PIC -->
+    <div class="busPic_popUp inside" id="busPicInsidePopUp">
+        <img src="@ViewBag.TripJson.ImgInside" alt="insideBus">
+    </div>
+
+    <div class="busPic_popUp outside" id="busPicOutsidePopUp">
+        <img src="@ViewBag.TripJson.ImgOutside" alt="bus">
+    </div>
+}
+
 <script>
-    console.log("this is itinerary page");
 
-
-    // FIND A WAY TO DISPLAY THIS DATA
-    const trip = @Html.Raw(Json.Serialize(ViewBag.TripJson));
-    console.log(trip);
-    console.log(trip.tripId);
-
-    const bookingMainCon = document.querySelector(".booking_main_con");
-    bookingMainCon.classList.toggle('inactive');
 </script>

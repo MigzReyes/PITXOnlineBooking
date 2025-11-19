@@ -190,11 +190,11 @@ if (page) {
             
             // CALCULATE TOTAL
             // USE PACKAGE C - 148 PESOS       
-            console.log("Package: ", insurance.Id = 3); // REMOVE THIS
+            console.log("Package: ", insurance.Id = 4); // REMOVE THIS
             const totalPrice = document.getElementById("totalPrice");
             let discount;
 
-            const selectedInsurance = insurance.find(i => i.id === 3);
+            const selectedInsurance = insurance.find(i => i.id === 4);
 
             // DEFAULT INSURANCE PACKAGE C - 148 PESOS
             discount = selectedInsurance.price + trip.price + 6;
@@ -211,7 +211,7 @@ if (page) {
                     bookedTripJson.passengerNo.children = child;
                     bookedTripJson.passengerNo.seniors = senior;
                     bookedTripJson.passengerNo.students = student;
-                    bookedTripJson.insuranceType = 3;
+                    bookedTripJson.insuranceType = 4;
                     bookedTripJson.totalPrice = discount;
 
                     // TRIP JSON
@@ -328,7 +328,7 @@ if (page) {
 
             // INSURANCE TYPE
             let insuranceType = 3;
-            let insurancePrice = trip.price + insuranceJson[2].price + 6; // DEFAULT
+            let insurancePrice = trip.price + insuranceJson[3].price + 6; // DEFAULT
             console.log("insurance price: ", insurancePrice); 
 
             let noInsuranceText;
@@ -430,6 +430,8 @@ if (page) {
             const packageB = document.getElementById("packageB");
             const packageC = document.getElementById("packageC");
 
+            
+
             noInsurance.addEventListener("click", () => {
                 updatePassenger(numOfPassenger);
                 updateTotalPrice(insurancePrice);
@@ -438,12 +440,13 @@ if (page) {
                 insuranceBtnText.forEach(input => {
                     input.textContent = noInsuranceText;
                 });
+
             });
 
             packageA.addEventListener("click", () => {
                 updatePassenger(numOfPassenger);
                 updateTotalPrice(insurancePrice);
-                updateInsurance(packageAText, 0);
+                insuranceType = updateInsurance(packageAText, 1);
 
                 insuranceBtnText.forEach(input => {
                     input.textContent = packageAText;
@@ -453,7 +456,7 @@ if (page) {
             packageB.addEventListener("click", () => {
                 updatePassenger(numOfPassenger);
                 updateTotalPrice(insurancePrice);
-                updateInsurance(packageBText, 1);
+                insuranceType = updateInsurance(packageBText, 2);
 
                 insuranceBtnText.forEach(input => {
                     input.textContent = packageBText;
@@ -463,7 +466,7 @@ if (page) {
             packageC.addEventListener("click", () => {
                 updatePassenger(numOfPassenger);
                 updateTotalPrice(insurancePrice);
-                updateInsurance(packageCText, 2);
+                insuranceType = updateInsurance(packageCText, 3);
 
                 insuranceBtnText.forEach(input => {
                     input.textContent = packageCText;
@@ -609,7 +612,7 @@ if (page) {
                     const discountPrice = insurance * 0.20;
                     console.log(discountPrice);
                     this.finalPrice = (insurance - discountPrice) * numOfPassenger;
-                    totalPrice.textContent = this.finalPrice;
+                    totalPrice.textContent = this.finalPrice.toFixed(1);
                 } else {
                     this.finalPrice = insurance * numOfPassenger;
                     totalPrice.textContent = this.finalPrice;
@@ -624,7 +627,7 @@ if (page) {
                     this.insurancePrice = price;
                     const discountPrice = this.insurancePrice * 0.20;
                     this.finalPrice = (this.insurancePrice - discountPrice) * numOfPassenger;
-                    totalPrice.textContent = this.finalPrice;
+                    totalPrice.textContent = this.finalPrice.toFixed(1);
                 } else {
                     this.insurancePrice = price;
                     this.finalPrice = this.insurancePrice * numOfPassenger;
@@ -675,9 +678,9 @@ if (page) {
                 });
 
                 noInsuranceText = "No Insurance"
-                packageAText = "Package A = ₱" + insuranceJson[0].price +" (1 x " + numOfPassenger + " pax)";
-                packageBText = "Package B = ₱" + insuranceJson[1].price +" (1 x " + numOfPassenger + "  pax)";
-                packageCText = "Package C = ₱" + insuranceJson[2].price +" (1 x " + numOfPassenger + " pax)";
+                packageAText = "Package A = ₱" + insuranceJson[1].price +" (1 x " + numOfPassenger + " pax)";
+                packageBText = "Package B = ₱" + insuranceJson[2].price +" (1 x " + numOfPassenger + "  pax)";
+                packageCText = "Package C = ₱" + insuranceJson[3].price +" (1 x " + numOfPassenger + " pax)";
             }
         }
 

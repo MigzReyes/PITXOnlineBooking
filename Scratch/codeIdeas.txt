@@ -1,4 +1,7 @@
 
+IMPORTANT AS FUCK!!! always use lowercase for table and column name!!!!!
+
+
 TICKET FORMAT
 
 	QR Code
@@ -159,7 +162,21 @@ TICKET FORMAT
 						How do I send the JSON objecto to the next page? Using session storage
 
 						Should I put all of the insurance data inside the trip json in the itinerary action????
+
+
+
+						FIX TRIP CLEAN UP SERVICE!! It needs to delete all of of the trips today not just the current and past days but the whole day 
  
+						Differentiate the passenger age group based on their birth of date.
+
+
+						CREATE A BASE VARIABLE PRICE THE CREATE A FUNCTION FOR CALCULATING THE INSURANCE AND THE PASSENGER PAX
+						SO IT IS DYNAMIC
+
+						create a validation for each booking process
+
+								itinerary
+									- Passenger count
 
 Buses Trip hours
 

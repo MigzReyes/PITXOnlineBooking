@@ -56,9 +56,11 @@ if (destinationInput) {
     tomorrowDate.setDate(todayDate.getDate() + 1);
 
     // TODAY AND TOMORROW
-    const today = todayDate.toISOString().split("T")[0];
-    const tomorrow = tomorrowDate.toISOString().split("T")[0];
+    const today = todayDate.toLocaleDateString("en-CA");
+    const tomorrow = tomorrowDate.toLocaleDateString("en-CA");
     let datePicked;
+
+    console.log("Todays Date: ", today);
 
     // DESTINATION VARIABLE GLOBAL  
     let destination = destinationInput.textContent;
@@ -89,8 +91,8 @@ if (destinationInput) {
             body: JSON.stringify({ TripDate: datePicked, Destination: destination })
         }).then(response => response.json())
         .then(data => {
-            console.log("CHECK TRIP Destination: ", destination, " Trip Date: ", today);
-            console.log("Server response: ", data);
+            console.log("CHECK TRIP Destination: ", destination, " Trip Date: ", today); // REMOVE THIS
+            console.log("Server response: ", data); // REMOVE THIS
 
             // DATE TIME FUNCTION
             function formatDateTime(dateTime) {
@@ -186,7 +188,7 @@ if (destinationInput) {
             const d = new Date(date);
             d.setDate(date.getDate() + i);
             
-            const dISO = d.toISOString().split("T")[0];
+            const dISO = d.toLocaleDateString("en-CA");
         
             const li  = document.createElement("li");
             li.setAttribute("data-date", dISO);
@@ -228,7 +230,7 @@ if (destinationInput) {
     }
 
     function selectDate(date) {
-        datePicked = date.toISOString().split("T")[0];
+        datePicked = date.toLocaleDateString("en-CA");
 
         const errorBookingBus = document.querySelector(".error_booking_bus");
         console.log("date picked: ", datePicked, " today: ", today);
@@ -247,8 +249,8 @@ if (destinationInput) {
             body: JSON.stringify({ TripDate: datePicked, Destination: destination })
         }).then(response => response.json())
         .then(data => {
-            console.log("DATE SELECTION select date: ", datePicked, " Destination: ", destination);
-            console.log("Server response :", data);
+            console.log("DATE SELECTION select date: ", datePicked, " Destination: ", destination); // REMOVE THIS
+            console.log("Server response :", data); // REMOVE THIS
 
             // PUT THE UPDATED LIST HERE
             // DATE TIME FUNCTION

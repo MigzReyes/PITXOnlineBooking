@@ -55,8 +55,21 @@
         </div>
     </footer>
 
+
     <!-- POP UP -->
     <div class="popup_con" id="popUpCon">
+        <!-- ERROR -->
+        <div class="pop_up_alert_con" id="popUpAlert">
+            <div class="pop_up_alert_heading">
+                <img id="closeBtn" class="close" src="~/icons/close.svg" alt="close">
+                <p>Oops!</p>
+            </div>
+
+            <div class="pop_up_alert_para">
+                <p id="popUpAlertText"></p>
+            </div>
+        </div>
+
         @RenderSection("PopUpCon", required: false)
     </div>
 

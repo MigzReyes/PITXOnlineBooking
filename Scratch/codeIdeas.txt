@@ -178,6 +178,11 @@ TICKET FORMAT
 								itinerary
 									- Passenger count
 
+						Check if 1 adult and 1 senior only student will use the discount not the parent
+
+							- Do not calculate the total passenenger with the discount
+
+
 Buses Trip hours
 
 	PITX to Baguio - 8 hr 30 min

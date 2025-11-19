@@ -74,22 +74,18 @@ if (page) {
             const subAdult = document.getElementById("subAdult");
             const subChild = document.getElementById("subChild"); 
             const subSenior = document.getElementById("subSenior");
-            const subStudent = document.getElementById("subStudent");
             const addAdult = document.getElementById("addAdult");
             const addChild = document.getElementById("addChild");
             const addSenior = document.getElementById("addSenior");
-            const addStudent = document.getElementById("addStudent");
 
             const noOfPassenger = document.querySelectorAll(".noOfPassenger");
             const noOfAdults = document.getElementById("noOfAdults");
             const noOfChild = document.getElementById("noOfChild");
             const noOfSenior = document.getElementById("noOfSenior");
-            const noOfStudent = document.getElementById("noOfStudent");
 
             let adult = 1;
             let child = 0;
             let senior = 0;
-            let student = 0;
 
             passengerInput.addEventListener("click", () => {
                 passengerPopUp = document.getElementById("passengerPopUp");
@@ -146,20 +142,6 @@ if (page) {
                 updateDisplay();
             });
 
-            subStudent.addEventListener("click", () => {
-                if (student > 0) {
-                    student--;
-                    noOfStudent.textContent = student.toLocaleString();
-                    updateDisplay();
-                }
-            });
-
-            addStudent.addEventListener("click", () => {
-                student++;
-                noOfStudent.textContent = student.toLocaleString();
-                updateDisplay();
-            });
-
             // BUS PIC
             const busInside = document.getElementById("busInside");
             const busOutside = document.getElementById("busOutside");
@@ -204,13 +186,12 @@ if (page) {
             bookingMainCon.classList.toggle('inactive');
 
             nextBtn.addEventListener("click", () => {
-                let totalPassenger = adult + child + senior + student;
+                let totalPassenger = adult + child + senior;
 
                 if (totalPassenger > 0) {    
                     bookedTripJson.passengerNo.adults = adult;
                     bookedTripJson.passengerNo.children = child;
                     bookedTripJson.passengerNo.seniors = senior;
-                    bookedTripJson.passengerNo.students = student;
                     bookedTripJson.insuranceType = 4;
                     bookedTripJson.totalPrice = discount;
 
@@ -233,7 +214,7 @@ if (page) {
 
             // FUNCTIONS
             function updateDisplay() {
-                let passenger = adult + child + senior + student;
+                let passenger = adult + child + senior;
                 console.log("total passenger (update display): ", passenger);
 
                 noOfPassenger.forEach(span => {
@@ -242,7 +223,7 @@ if (page) {
 
                 // DISCOUNT
                 price = passenger * (trip.price + selectedInsurance.price + 6);
-                discount = price -(((student + senior) * (trip.price + selectedInsurance.price + 6))* 0.20);
+                discount = price -((senior * (trip.price + selectedInsurance.price + 6))* 0.20);
 
                 // TOTAL PRICE CALCULATION
                 console.log("total price: ", discount); // REMOVE THIS
@@ -309,12 +290,7 @@ if (page) {
             destination.textContent = trip.destination;
 
             // ADD PASSENGER
-            let totalPassenger = trip.bookedTripJson.passengerNo.adults + trip.bookedTripJson.passengerNo.children + trip.bookedTripJson.passengerNo.seniors + trip.bookedTripJson.passengerNo.students;;
-            if (totalPassenger == 1) {
-                totalPassenger = 0;
-            } else {
-                totalPassenger = trip.bookedTripJson.passengerNo.adults + trip.bookedTripJson.passengerNo.children + trip.bookedTripJson.passengerNo.seniors + trip.bookedTripJson.passengerNo.students;
-            }
+            let totalPassenger = trip.bookedTripJson.passengerNo.adults + trip.bookedTripJson.passengerNo.children + trip.bookedTripJson.passengerNo.seniors;
 
             // TOTAL CON 
             const insurance = document.getElementById("insurance");
@@ -326,18 +302,22 @@ if (page) {
             totalPrice.textContent = finalPrice; // DISPLAY
             insurance.textContent = 148; // DEFAULT INSURANCE
 
-            // INSURANCE TYPE
-            let insuranceType = 3;
-            let insurancePrice = trip.price + insuranceJson[3].price + 6; // DEFAULT
-            console.log("insurance price: ", insurancePrice); 
+            // INSURANCE POP UP
+            const insuranceBtn = document.getElementById("insuranceBtn");
+            const insuranceBtnText = document.querySelectorAll(".insuranceBtnText");
 
             let noInsuranceText;
             let packageAText;
             let packageBText;
             let packageCText;
 
+            // INSURANCE TYPE
+            let insuranceType = 3;
+            let insurancePrice = trip.price; // DEFAULT
+            console.log("insurance price: ", insurancePrice); 
+
             let numOfPassenger = totalPassenger; // TOTAL PASSENGER
-            updatePassenger(numOfPassenger + 1); // DISPLAY INSURANCE TEXT
+            updatePassenger(numOfPassenger, insuranceType); // DISPLAY INSURANCE TEXT
             passengerCon.appendChild(addPassenger());
             blockFutureDates();
 
@@ -346,7 +326,6 @@ if (page) {
 
                 const div = document.createElement("div");
                 div.classList.add("extra_passenger_con");
-                div.setAttribute("id", "extraPassengerCon");
                 div.dataset.passengerId = numOfPassenger;
 
                 div.innerHTML = `<div class="remove_passenger_con">
@@ -379,9 +358,9 @@ if (page) {
                 blockFutureDates();
                 
                 // ADD A FUNCTION THAT UPDATES THE NUMBER OF PASSENGER AND THE TOTAL PRICE
-                updatePassenger(numOfPassenger);
-                console.log("Insurance Price: ", insurancePrice);
-                updateTotalPrice(insurancePrice);
+                updatePassenger(numOfPassenger, insuranceType);
+                console.log("Insurance Price: ", insurancePrice); // REMOVE THIS
+                updateTotalPrice(insurancePrice, insuranceType);
 
                 passengerCount(passengerCon);
             });
@@ -396,8 +375,8 @@ if (page) {
                 div.remove();
                 numOfPassenger--;
 
-                updatePassenger(numOfPassenger);
-                updateTotalPrice(insurancePrice);
+                updatePassenger(numOfPassenger, insuranceType);
+                updateTotalPrice(insurancePrice, insuranceType);
 
                 passengerCount(passengerCon);
             });
@@ -414,11 +393,6 @@ if (page) {
                 numOfPassenger = passengers.length + 1;
             }
 
-            // INSURANCE POP UP
-            const insuranceBtn = document.getElementById("insuranceBtn");
-            const insuranceBtnText = document.querySelectorAll(".insuranceBtnText");
-        
-
             insurancePopUp = document.getElementById("insurancePopUp");
             insuranceBtn.addEventListener("click", () => {
                 insurancePopUp.classList.toggle("show");
@@ -433,44 +407,27 @@ if (page) {
             
 
             noInsurance.addEventListener("click", () => {
-                updatePassenger(numOfPassenger);
-                updateTotalPrice(insurancePrice);
-                updateInsurance(noInsuranceText, 0);
-                
-                insuranceBtnText.forEach(input => {
-                    input.textContent = noInsuranceText;
-                });
-
+                updatePassenger(numOfPassenger, 0);
+                updateTotalPrice(insurancePrice, 0);
+                insuranceType = updateInsurance(noInsuranceText, 0);
             });
 
             packageA.addEventListener("click", () => {
-                updatePassenger(numOfPassenger);
-                updateTotalPrice(insurancePrice);
+                updatePassenger(numOfPassenger, 1);
+                updateTotalPrice(insurancePrice, 1);
                 insuranceType = updateInsurance(packageAText, 1);
-
-                insuranceBtnText.forEach(input => {
-                    input.textContent = packageAText;
-                });
             });
 
             packageB.addEventListener("click", () => {
-                updatePassenger(numOfPassenger);
-                updateTotalPrice(insurancePrice);
+                updatePassenger(numOfPassenger, 2);
+                updateTotalPrice(insurancePrice, 2);
                 insuranceType = updateInsurance(packageBText, 2);
-
-                insuranceBtnText.forEach(input => {
-                    input.textContent = packageBText;
-                });
             });
 
             packageC.addEventListener("click", () => {
-                updatePassenger(numOfPassenger);
-                updateTotalPrice(insurancePrice);
+                updatePassenger(numOfPassenger, 3);
+                updateTotalPrice(insurancePrice, 3);
                 insuranceType = updateInsurance(packageCText, 3);
-
-                insuranceBtnText.forEach(input => {
-                    input.textContent = packageCText;
-                });
             });
         
 
@@ -503,36 +460,61 @@ if (page) {
                     if (mobile.length == 11) {
                         if (emailRegex.test(email)) {
                             // MAIN PASSENGER INFO
+
                             const fields = ["email", "mobile", "firstName", "lastName", "birthDate"];
                             const formData = {};
 
                             fields.forEach(key => {
                                 formData[key] = document.getElementById(key).value;
+                                if (key === "birthDate") {
+                                    const birthday = document.getElementById("birthDate").value;
+
+                                    const age = getAge(birthday);
+                                    const group = ageGroup(age);
+                                    formData["ageGroup"] = group;
+                                }
                             });
 
                             Object.assign(trip.bookedTripJson.user, formData);
 
-                            // PASSENGER INFO
-                            document.querySelectorAll(".extra_passenger_main").forEach(div => {
-                                let id = 0;
-                                id++;
-                                console.log("pass Id: ", id);
 
-                                trip.bookedTripJson.user.passengers = {
-                                    id: id,
-                                    firstName: div.querySelector('input[name="firstName"]').value,
-                                    lastName: div.querySelector('input[name="lastName"]').value,
-                                    birthDate: div.querySelector('input[name="birthDate"]').value
-                                };
-                            });
+
+                            // PASSENGER INFO
+                            const extraPassengerInfo = document.querySelectorAll(".extra_passenger_con");
+                            console.log(extraPassengerInfo);
+
+                            if (extraPassengerInfo.length > 0) {
+                                let id = 0;
+
+                                trip.bookedTripJson.user.passengers = [];
+
+                                extraPassengerInfo.forEach((div, index) => {
+                                    id++;
+                                    console.log("pass Id: ", id);
+
+                                    const birthday = div.querySelector('input[name="birthDate"]').value;
+
+                                    const age = getAge(birthday);
+                                    const group = ageGroup(age);
+
+                                    trip.bookedTripJson.user.passengers.push({
+                                        id: id,
+                                        firstName: div.querySelector('input[name="firstName"]').value,
+                                        lastName: div.querySelector('input[name="lastName"]').value,
+                                        ageGroup: group,
+                                        birthDate: birthday
+                                    });
+                                });
+                            }
 
                             // INSURANCE TYPE
                             trip.bookedTripJson.insuranceType = insuranceType;
 
                             // TOTAL PRICE
-                            trip.bookedTripJson.totalPassenger = this.finalPrice;
+                            trip.bookedTripJson.totalPrice = this.finalPrice;
+                            sessionStorage.setItem("bookedTripJson", JSON.stringify(trip));
 
-                            //window.location.href = "/Home/Confirmation";
+                            window.location.href = "/Home/Confirmation";
                         } else {
                             alert("Invalid Email");
                         }
@@ -567,7 +549,6 @@ if (page) {
                 for (i = 1; i < numOfPassenger; i++) {
                     const div = document.createElement("div");
                     div.classList.add("extra_passenger_con");
-                    div.setAttribute("id", "extraPassengerCon");
                     div.dataset.passengerId = numOfPassenger;
 
                     div.innerHTML = `<div class="remove_passenger_con">
@@ -605,23 +586,20 @@ if (page) {
             }
 
             // UPDATE TOTAL PRICE 
-            function updateTotalPrice(insurance) {
-                const discount = trip.bookedTripJson.passengerNo.seniors + trip.bookedTripJson.passengerNo.students;
+            function updateTotalPrice(insurance, insuranceNum) {
+                const discount = trip.bookedTripJson.passengerNo.seniors;
 
-                if (discount > 0) {
-                    const discountPrice = insurance * 0.20;
-                    console.log(discountPrice);
-                    this.finalPrice = (insurance - discountPrice) * numOfPassenger;
-                    totalPrice.textContent = this.finalPrice.toFixed(1);
-                } else {
-                    this.finalPrice = insurance * numOfPassenger;
-                    totalPrice.textContent = this.finalPrice;
-                }
+                const totalPriceUpdate = insurance + insuranceJson[insuranceNum].price + 6;
+                console.log("totalPrice", insurance);
+                const discountPrice = (totalPriceUpdate * 0.20) * discount;
+                console.log("discount price: ", discountPrice, "price per pass: ", totalPriceUpdate); // REMOVE THIS
+                this.finalPrice = (totalPriceUpdate * numOfPassenger) - discountPrice;
+                totalPrice.textContent = this.finalPrice.toFixed(1);
             }
 
             // UPDATE PRICE (INSURANCE)
             function updatePrice(price) {
-                const discount = trip.bookedTripJson.passengerNo.seniors + trip.bookedTripJson.passengerNo.students;
+                const discount = trip.bookedTripJson.passengerNo.seniors;
 
                 if (discount > 0) {
                     this.insurancePrice = price;
@@ -646,21 +624,19 @@ if (page) {
 
                     // GET THE TRIP PRICE - TOTAL PRICE - 6 = INSURANCE PRICE
                     const noInsurancePrice = trip.bookedTripJson.totalPrice - trip.price;
-                    price = trip.bookedTripJson.totalPrice - noInsurancePrice + 6;
-                    let packagePrice = price;
-                    console.log("no insurance: ", price);
-                    insurancePrice = price;
-
-                    updatePrice(packagePrice);
+                    price = trip.bookedTripJson.totalPrice - noInsurancePrice; // IMPORTANT
+                    console.log("no insurance: ", price); // REMOVE THIS
+                    insurancePrice = price; 
                     insuranceType = 0;
+                    console.log("insurancePrice", insurancePrice);
+                    updateTotalPrice(insurancePrice, num);
+
                     insurance.textContent = 0;
                 } else {
                     // CALCULATE
-                    price = trip.price + insuranceJson[num].price + 6;
-                    let packagePrice = price;
-                    updatePrice(packagePrice);
                     insuranceType = num;
-                    insurancePrice = price;
+                    console.log("insurancePrice", insurancePrice);
+                    updateTotalPrice(insurancePrice, num);
                     
                     // DISPLAY
                     insurance.textContent = insuranceJson[num].price; 
@@ -670,18 +646,75 @@ if (page) {
             }
 
             // UPDATE PASSENGER COUNT 
-            function updatePassenger(numOfPassenger) {
+            function updatePassenger(numOfPassenger, typeInsurance) {
                 // INSURANCE TEXT
                 const insurancePax = document.querySelectorAll(".insurancePax");
                 insurancePax.forEach(i => {
                     i.textContent = numOfPassenger;
                 });
 
-                noInsuranceText = "No Insurance"
+                noInsuranceText = "No Insurance";
                 packageAText = "Package A = ₱" + insuranceJson[1].price +" (1 x " + numOfPassenger + " pax)";
                 packageBText = "Package B = ₱" + insuranceJson[2].price +" (1 x " + numOfPassenger + "  pax)";
                 packageCText = "Package C = ₱" + insuranceJson[3].price +" (1 x " + numOfPassenger + " pax)";
+
+                let text;
+
+                console.log(typeInsurance);
+                switch(typeInsurance) {
+                    case 0: 
+                        text = noInsuranceText;
+                        break;
+                    case 1:
+                        text = packageAText;
+                        break;
+                    case 2:
+                        text = packageBText;
+                        break;
+                    case 3: 
+                        text = packageCText;
+                        break;
+                    default:
+                        text = packageCText;
+                }
+
+                insuranceBtnText.forEach(input => {
+                    input.textContent = text;
+                });
             }
+
+            // GET AGE
+            function getAge(getBirthDate) {
+                const today = new Date();
+                const birthDate = new Date(getBirthDate);
+
+                let age = today.getFullYear() - birthDate.getFullYear();
+
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                const dayDiff = today.getDate() - birthDate.getDate();
+
+                if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+                    age--;
+                }
+
+                return age;
+            }
+
+            function ageGroup(age) {
+                if (age >= 18) return "Adult";
+                if (age <= 17) return "Child";
+                if (age >= 65) return "Senior";
+            }
+
+        }
+
+        if (page.textContent.toLowerCase() === "confirmation" ) {
+            // GET BOOKED TRIP JSON
+            const trip = JSON.parse(sessionStorage.getItem("bookedTripJson"));
+            console.log(trip);
+
+            
+
         }
 
         // SUCCESS PAYMENT

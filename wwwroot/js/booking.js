@@ -603,16 +603,33 @@ if (page) {
 
             // UPDATE TOTAL PRICE 
             function updateTotalPrice(insurance) {
-                this.finalPrice = insurance * numOfPassenger;
-                totalPrice.textContent = this.finalPrice;
+                const discount = trip.bookedTripJson.passengerNo.seniors + trip.bookedTripJson.passengerNo.students;
+
+                if (discount > 0) {
+                    const discountPrice = insurance * 0.20;
+                    console.log(discountPrice);
+                    this.finalPrice = (insurance - discountPrice) * numOfPassenger;
+                    totalPrice.textContent = this.finalPrice;
+                } else {
+                    this.finalPrice = insurance * numOfPassenger;
+                    totalPrice.textContent = this.finalPrice;
+                }
             }
 
             // UPDATE PRICE (INSURANCE)
             function updatePrice(price) {
-                this.insurancePrice = price
-                this.finalPrice = this.insurancePrice * numOfPassenger;
-                totalPrice.textContent = this.finalPrice;
-                console.log("final price: ", this.finalPrice, "btn: ", totalPrice); // REMOVE THIS
+                const discount = trip.bookedTripJson.passengerNo.seniors + trip.bookedTripJson.passengerNo.students;
+
+                if (discount > 0) {
+                    this.insurancePrice = price;
+                    const discountPrice = this.insurancePrice * 0.20;
+                    this.finalPrice = (this.insurancePrice - discountPrice) * numOfPassenger;
+                    totalPrice.textContent = this.finalPrice;
+                } else {
+                    this.insurancePrice = price;
+                    this.finalPrice = this.insurancePrice * numOfPassenger;
+                    totalPrice.textContent = this.finalPrice;
+                }
             }
 
             // UPDATE INSURANCE

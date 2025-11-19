@@ -183,6 +183,12 @@ TICKET FORMAT
 							- Do not calculate the total passenenger with the discount
 
 
+							LATER DISPLAY ALL OF THE DETAILS IN RECEIPT
+
+							HOST GCASH AND MAYA API
+							
+
+
 Buses Trip hours
 
 	PITX to Baguio - 8 hr 30 min

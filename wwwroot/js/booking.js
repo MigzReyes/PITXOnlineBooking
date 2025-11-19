@@ -249,26 +249,8 @@ if (page) {
             const addPassengerBtn = document.getElementById("addPassengerBtn");
             const passengerCon = document.getElementById("passengerCon");
 
-            // TIMER
-            const bookingTimer = document.getElementById("bookingTimer");
-            let time = 30 * 60;
-
-            let interval = setInterval(() => {
-
-                let minutes = Math.floor(time / 60);
-                let seconds = time % 60;
-
-                bookingTimer.textContent = "00:" + minutes + ":" + seconds.toString().padStart(2, "0");
-
-                time--;  
-                
-                if (time < 0) {
-                    clearInterval(interval);
-                    console.log("Run out of time");
-
-                    // CREATE A POP UP AND REMOVE THE USER FROM THE BOOKING PROCESS 
-                }
-            }, 1000);
+            localStorage.removeItem("bookingTimer");
+            timer(); // BOOKING TIMER
 
             // TRIP SUMMARY
             console.log(trip.departureTime);
@@ -594,7 +576,7 @@ if (page) {
                 const discountPrice = (totalPriceUpdate * 0.20) * discount;
                 console.log("discount price: ", discountPrice, "price per pass: ", totalPriceUpdate); // REMOVE THIS
                 this.finalPrice = (totalPriceUpdate * numOfPassenger) - discountPrice;
-                totalPrice.textContent = this.finalPrice.toFixed(1);
+                totalPrice.textContent = this.finalPrice.toFixed(0);
             }
 
             // UPDATE PRICE (INSURANCE)
@@ -605,7 +587,7 @@ if (page) {
                     this.insurancePrice = price;
                     const discountPrice = this.insurancePrice * 0.20;
                     this.finalPrice = (this.insurancePrice - discountPrice) * numOfPassenger;
-                    totalPrice.textContent = this.finalPrice.toFixed(1);
+                    totalPrice.textContent = this.finalPrice.toFixed(0);
                 } else {
                     this.insurancePrice = price;
                     this.finalPrice = this.insurancePrice * numOfPassenger;
@@ -708,18 +690,157 @@ if (page) {
 
         }
 
-        if (page.textContent.toLowerCase() === "confirmation" ) {
+        if (page.textContent.toLowerCase() === "confirmation") {
             // GET BOOKED TRIP JSON
             const trip = JSON.parse(sessionStorage.getItem("bookedTripJson"));
             console.log(trip);
 
-            
+            // GET INSURANCE
+            const insurance = JSON.parse(sessionStorage.getItem("insurance"));
+            console.log(insurance);
 
+            // TIMER
+            timer();
+
+            // VARIABLES
+            const departureDate = document.getElementById("departureDate");
+            const destination = document.getElementById("destination");
+            const totalPrice = document.getElementById("totalPrice");
+            const insurancePrice = document.getElementById("insurancePrice");
+            const nextBtn = document.getElementById("nextBtn");
+
+            // PASSENGER
+            const mainPassenger = document.getElementById("mainPassenger");
+            const mainAgeGroup = document.getElementById("mainAgeGroup");
+            const passengerList = document.getElementById("passengerList");
+
+            // DISPLAY DEPARTURE
+            const date = new Date(trip.departureTime);
+            const departureTimeFormat = date.toLocaleString("en-CA", {
+                weekday: "short",
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true
+            });
+            departureDate.textContent = departureTimeFormat;
+
+            // DISPLAY DESTINATION
+            destination.textContent = trip.destination;
+
+
+            // TOTAL CON
+            totalPrice.textContent = trip.bookedTripJson.totalPrice;
+            insurancePrice.textContent = insurance[trip.bookedTripJson.insuranceType].price;
+
+            // DISPLAY MAIN PASSENGER
+            mainPassenger.textContent = trip.bookedTripJson.user.firstName + " " + trip.bookedTripJson.user.lastName;
+            mainAgeGroup.textContent = trip.bookedTripJson.user.ageGroup;
+
+            const passengerObject = trip.bookedTripJson.user.passengers;
+            if (passengerObject.length > 0) {
+                passengerList.innerHTML = passengerObject.map(p => `<li> <span class="passengerName">${p.firstName} ${p.lastName}</span>, <span class="passengerAgeGroup">${p.ageGroup}</span></li>`).join("");
+            }
+
+
+            nextBtn.addEventListener("click", () => {
+
+                window.location.href = "/Home/Payment";
+            });
+        }
+
+        if (page.textContent.toLowerCase() === "payment") {
+            console.log("this is payment page");
+
+            // GET BOOKED TRIP JSON
+            const trip = JSON.parse(sessionStorage.getItem("bookedTripJson"));
+            console.log(trip);
+
+            // GET INSURANCE
+            const insurance = JSON.parse(sessionStorage.getItem("insurance"));
+            console.log(insurance);
+
+            // TIMER
+            timer();
+
+            // VARIABLES
+            const departureDate = document.getElementById("departureDate");
+            const destination = document.getElementById("destination");
+            const totalPrice = document.querySelectorAll(".totalPrice");
+            const insurancePrice = document.getElementById("insurancePrice");
+            const gcash = document.getElementById("gcash");
+            const maya = document.getElementById("maya");
+            const payBtn = document.getElementById("payBtn");
+
+            // PASSENGER
+            const mainPassenger = document.getElementById("mainPassenger");
+            const mainAgeGroup = document.getElementById("mainAgeGroup");
+            const passengerList = document.getElementById("passengerList");
+
+            // DISPLAY DEPARTURE
+            const date = new Date(trip.departureTime);
+            const departureTimeFormat = date.toLocaleString("en-CA", {
+                weekday: "short",
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true
+            });
+            departureDate.textContent = departureTimeFormat;
+
+            // DISPLAY DESTINATION
+            destination.textContent = trip.destination;
+
+
+            // TOTAL CON
+            totalPrice.forEach(p => {
+                p.textContent = trip.bookedTripJson.totalPrice;
+            });
+            insurancePrice.textContent = insurance[trip.bookedTripJson.insuranceType].price;
+
+            // DISPLAY MAIN PASSENGER
+            mainPassenger.textContent = trip.bookedTripJson.user.firstName + " " + trip.bookedTripJson.user.lastName;
+            mainAgeGroup.textContent = trip.bookedTripJson.user.ageGroup;
+
+            const passengerObject = trip.bookedTripJson.user.passengers;
+            if (passengerObject.length > 0) {
+                passengerList.innerHTML = passengerObject.map(p => `<li> <span class="passengerName">${p.firstName} ${p.lastName}</span>, <span class="passengerAgeGroup">${p.ageGroup}</span></li>`).join("");
+            }
+
+            // PAYMENT GATEWAY
+            let paymentMethod = "gcash";
+
+            gcash.addEventListener("click", () => {
+                document.getElementById("gcashBtn").click();
+                paymentMethod = "gcash";
+            });
+
+            maya.addEventListener("click", () => {
+                document.getElementById("mayaBtn").click();
+                paymentMethod = "maya";
+            });
+
+            payBtn.addEventListener("click", () => {
+                if (paymentMethod === "gcash") {
+                    window.location.href = "/GCash/GCashMain";
+                } else if (paymentMethod === "maya") {
+
+                } else {
+                    console.log("Cannot redirect no payment chosen");
+                }
+            });
+
+            const bookingMainCon = document.querySelector(".booking_main_con");
+            bookingMainCon.classList.toggle('inactive');
         }
 
         // SUCCESS PAYMENT
         if (page.textContent.toLowerCase() === "receipt") {
-
+        
             // SUCCESS POP UP
             popUpCon.classList.toggle("show");
             successPayPopUp = document.getElementById("successPayPopUp");
@@ -766,5 +887,40 @@ if (page) {
             receiptPopUp.classList.remove("show");
         }
     });
+}
+
+function timer() {
+    // TIMER
+    const bookingTimer = document.getElementById("bookingTimer");
+    if (!bookingTimer) return;
+    let time = 30 * 60 * 1000;
+
+    let timer = localStorage.getItem("bookingTimer"); 
+
+    if (!timer) {
+        timer = Date.now() + time;
+        localStorage.setItem("bookingTimer", timer);
+    } else {
+        timer = Number(timer);
+    }
+
+    let interval = setInterval(() => {
+        let remTime = timer - Date.now();
+
+        if (remTime <= 0) {
+            clearInterval(interval);
+            localStorage.removeItem("bookingTimer");
+            bookingTimer.textContent = "00:00:00";
+
+            console.log("Booking expired!!!");
+            return window.location.href = "/Home/Main";
+        }
+
+        const minutes = Math.floor(remTime / 1000 / 60);
+        const seconds = Math.floor((remTime / 1000) % 60);
+
+        bookingTimer.textContent = "00:" + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0");
+
+    }, 1000);
 }
 

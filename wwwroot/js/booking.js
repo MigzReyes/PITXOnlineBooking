@@ -826,7 +826,52 @@ if (page) {
 
             payBtn.addEventListener("click", () => {
                 if (paymentMethod === "gcash") {
-                    window.location.href = "/GCash/GCashMain";
+
+                    // REDIRECT TO GCASH HOSTED, 
+                    // SEND A POST REQUEST
+                    // IF KAYA NG ORAS
+                    /*const paymentInfo = {
+                        merchant: "PITX",
+                        amount: trip.bookedTripJson.totalPrice,
+                        redirectToClient: "Sample link",
+                    };
+
+                    fetch("https://prettied-punchily-angeles.ngrok-free.dev/Home/GCashMain", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(paymentInfo),
+                        credentials: "include"
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        // GCASH REPLY
+                        console.log("Response ni gcash", data);
+
+                        if (data.redirect) {
+                            window.location.href = data.redirect;
+                        }
+                    })
+                    .catch(console.error);*/ 
+
+                    fetch("/Home/SubmitPayment", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            Amount: trip.bookedTripJson.totalPrice,
+                            PaymentMethod: paymentMethod
+                        })
+                    }).then(res => res.json())
+                    .then(data => {
+                        // REDIRECT
+                        if (data.redirect) {
+                            window.location.href = data.redirect;
+                        }
+                    })
+                    .catch(error => console.log(error));
                 } else if (paymentMethod === "maya") {
 
                 } else {

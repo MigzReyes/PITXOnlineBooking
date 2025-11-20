@@ -186,6 +186,21 @@ TICKET FORMAT
 							LATER DISPLAY ALL OF THE DETAILS IN RECEIPT
 
 							HOST GCASH AND MAYA API
+
+							SO WHAT WILL HAPPEN IS THE INFORMATION THAT WE NEED TO NEED INTO OUT PAYMENT GATEWAY
+
+							IS
+
+								- The hosted link of PITX (For redirect after succesfull payment)
+
+
+								LAST RESORT!!
+									Store the dtaa coming from the client in the GCash database
+
+									and use the merchant name for identification.
+
+
+									AUTOMATE GCASH TO RESET IF BALANCE IS 0
 							
 
 

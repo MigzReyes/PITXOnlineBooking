@@ -213,4 +213,52 @@ public class HomeController : Controller
             tripId = trip
         });
     }
+
+    [HttpPost]
+    public IActionResult SubmitPayment([FromBody] PaymentRequest req)
+    {
+        // GCASH AMOUNT
+        Console.WriteLine("Accessed Gcash Table"); // REMOVE THIS
+
+        var gcashTable = _context.GCash.OrderByDescending(p => p.CreatedAt).FirstOrDefault();
+
+        if (gcashTable == null)
+        {
+            var balance = 10000;
+
+            var updateAvailBalance = new GCashModel
+            {
+                AvailableBalance = balance,
+                Amount = req.Amount
+            };
+
+            _context.GCash.Add(updateAvailBalance);
+            _context.SaveChanges();
+
+            return Ok( new { message = "GCash Balance update", redirect = Url.Action("GCashMain", "Gcash")});
+        }
+        else
+        {
+            if (gcashTable.AvailableBalance > 0)
+            {
+                return Ok( new { message = "GCash Balance is sufficient", redirect = Url.Action("GCashMain", "Gcash")});
+            }
+            else
+            {
+                var balance = 10000;
+
+                var updateAvailBalance = new GCashModel
+                {
+                    AvailableBalance = balance,
+                    Amount = req.Amount
+                };
+
+                _context.GCash.Add(updateAvailBalance);
+                _context.SaveChanges();
+                Console.WriteLine("Update GCash balance to 10,000"); // REMOVE THIS
+
+                return Ok( new { message = "GCash Balance update", redirect = Url.Action("GCashMain", "Gcash")});
+            }
+        }
+    } 
 }

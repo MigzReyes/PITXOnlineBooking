@@ -825,7 +825,7 @@ if (page) {
             });
 
             payBtn.addEventListener("click", () => {
-                if (paymentMethod === "gcash") {
+                if (paymentMethod != "") {
 
                     // REDIRECT TO GCASH HOSTED, 
                     // SEND A POST REQUEST
@@ -872,8 +872,7 @@ if (page) {
                         }
                     })
                     .catch(error => console.log(error));
-                } else if (paymentMethod === "maya") {
-
+                    
                 } else {
                     console.log("Cannot redirect no payment chosen");
                 }

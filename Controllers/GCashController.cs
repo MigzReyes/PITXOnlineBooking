@@ -23,7 +23,7 @@ public class GCashController(ILogger<GCashController> logger, ApplicationDbConte
             GCash = payment ?? new GCashModel()
         };
 
-        return View();
+        return View(vm);
     }
 
     [HttpPost]

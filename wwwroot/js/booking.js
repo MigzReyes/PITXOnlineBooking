@@ -493,7 +493,7 @@ if (page) {
                             trip.bookedTripJson.insuranceType = insuranceType;
 
                             // TOTAL PRICE
-                            trip.bookedTripJson.totalPrice = this.finalPrice;
+                            trip.bookedTripJson.totalPrice = finalPrice;
                             sessionStorage.setItem("bookedTripJson", JSON.stringify(trip));
 
                             window.location.href = "/Home/Confirmation";

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PITXOnlineBooking.Models;
 
-namespace PITXOnlineBooking
+namespace PITXOnlineBooking.Data
 {
     public class ApplicationDbContext : DbContext
     {

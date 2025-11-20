@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PITXOnlineBooking.Data;
 using PITXOnlineBooking.DTO;
 using PITXOnlineBooking.Models;
 

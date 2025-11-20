@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-//using PITXOnlineBooking.Data;
-//using PITXOnlineBooking.DTO;
+using PITXOnlineBooking.Data;
+using PITXOnlineBooking.DTO;
 using PITXOnlineBooking.Models;
 
 namespace PITXOnlineBooking.Controllers;

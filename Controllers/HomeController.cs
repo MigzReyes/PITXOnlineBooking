@@ -328,7 +328,6 @@ public class HomeController : Controller
         return Ok(new { message = "No Payment method chosen"});
     } 
 
-
     [HttpPost] 
     public IActionResult SendBookedTrip([FromBody] BookedTripRequest req)
     {
@@ -406,5 +405,27 @@ public class HomeController : Controller
         var dateBooked = _context.BookedTrip.Where(t => t.TicketNo == req.TicketNo).Select(d => d.DateBooked).FirstOrDefault();
 
         return Ok(new { message = "Send Booked Date", date = dateBooked });
+    }
+
+    [HttpPost]
+    public IActionResult SendTrip([FromBody] TripRequest trip)
+    {
+        //var getTrip = _context.Trip.Where(t => t.ArrivalTime > trip.ArrivalTime).OrderBy(t => t.ArrivalTime).Take(10).ToList();
+        var ran = new Random();
+        int ranNum = ran.Next(5, 18);
+
+        var sendTrip = (from getTrip in _context.Trip join bus in _context.Bus on getTrip.BusTripId equals bus.Id where getTrip.ArrivalTime > trip.ArrivalTime select new
+        {
+            Time = getTrip.ArrivalTime,
+            Destination = getTrip.Destination,
+            Operator = bus.Operator,
+            Gate = getTrip.Gate,
+            Bay = getTrip.Bay,
+            TripNo = getTrip.TripNo
+        }).AsNoTracking()
+        .Take(ranNum)
+        .ToList();
+
+        return Ok(new { message = "Trip data successfully sent", tripData = sendTrip});
     }
 }

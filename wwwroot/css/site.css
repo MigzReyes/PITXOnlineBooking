@@ -13,6 +13,10 @@
   --light-blue: #007CFF;
   --green: #02B464;
   --footer-grey: #414042;
+  --boarding: #6209D4;
+  --status: #007CFF;
+  --delayed: #FEC800;
+  --departed: #00BF00;
 
   --lightweight: 350;
   --regular: 400;
@@ -250,7 +254,7 @@ section {
 }
 
 .live_bus_schedule_top h1 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .live_bus_schedule_top_left {
@@ -351,15 +355,23 @@ section {
 
 .status {
   text-align: start !important;
-  color: #007CFF;
+  color: var(--status);
 }
 
 .boarding {
-  color: var(--light-blue);
+  color: var(--boarding);
 }
 
 .cancelled {
   color: var(--main-color-red);
+}
+
+.delayed {
+  color: var(--delayed);
+}
+
+.departed {
+  color: var(--departed);
 }
 
 /* BOOKING ***********************************************************************************************************************/
@@ -2472,7 +2484,7 @@ footer {
   }
 
   .live_bus_schedule_top h1 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
 
   .live_bus_schedule_date_con h1 {
@@ -2597,7 +2609,7 @@ footer {
   }
 
   .live_bus_schedule_top h1 {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   /* BOOKING */

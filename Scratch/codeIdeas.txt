@@ -205,6 +205,18 @@ TICKET FORMAT
 			CREATE A NEW OBJECT TO STORE IN THE DATABASE NOT THE WHOLE trip object
 
 
+			In the live bus sched use the tomorrow trips and based on the time today only display the
+			future trips.
+
+			create a fetch function to get the data in the trips
+
+			display only 10 trips 
+
+			get todays time and pass it in the back-end, then in the back end only get the trip that	
+			is ahead of the current time to simulate a live bus schedule 
+
+
+
 
 Buses Trip hours
 

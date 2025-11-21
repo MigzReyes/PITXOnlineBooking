@@ -1,4 +1,4 @@
-namespace PITXOnlineBooking
+namespace PITXOnlineBooking.DTO
 {
     public class PaymentRequest
     {

@@ -29,7 +29,6 @@ public class PayMayaController(ILogger<PayMayaController> logger, ApplicationDbC
             PayMaya = payment ?? new PayMayaModel()
         };
 
-        Console.WriteLine("Avail det: " + payment.AvailBalance); // RMOVE THIS
         return View(vm);
     }
 

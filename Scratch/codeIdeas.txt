@@ -200,8 +200,10 @@ TICKET FORMAT
 									and use the merchant name for identification.
 
 
-									AUTOMATE GCASH TO RESET IF BALANCE IS 0
-							
+			STORE THE BOOKEDTRIP DATA FIRST, THEN MAIN PASS, THEN PASS IN RECEIPT CONTROLELR -- Bad Design
+
+			CREATE A NEW OBJECT TO STORE IN THE DATABASE NOT THE WHOLE trip object
+
 
 
 Buses Trip hours

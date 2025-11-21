@@ -19,8 +19,7 @@ const bookedTripJson = {
     passengerNo: {
         adults: undefined,
         children: undefined,
-        seniors: undefined,
-        students: undefined
+        seniors: undefined
     },
     user: {
         email: undefined,
@@ -30,7 +29,7 @@ const bookedTripJson = {
         ageGroup: undefined,
         birthDate: undefined,
         passengers: {
-            id: undefined,
+            passengerId: undefined,
             firstName: undefined,
             lastName: undefined,
             ageGroup: undefined,
@@ -223,7 +222,7 @@ if (page) {
 
                 // DISCOUNT
                 price = passenger * (trip.price + selectedInsurance.price + 6);
-                discount = price -((senior * (trip.price + selectedInsurance.price + 6))* 0.20);
+                discount = Math.trunc(price -((senior * (trip.price + selectedInsurance.price + 6))* 0.20));
 
                 // TOTAL PRICE CALCULATION
                 console.log("total price: ", discount); // REMOVE THIS
@@ -294,7 +293,7 @@ if (page) {
             let packageCText;
 
             // INSURANCE TYPE
-            let insuranceType = 3;
+            let insuranceType = 3; // ARRAY VALUE
             let insurancePrice = trip.price; // DEFAULT
             console.log("insurance price: ", insurancePrice); 
 
@@ -480,7 +479,6 @@ if (page) {
                                     const group = ageGroup(age);
 
                                     trip.bookedTripJson.user.passengers.push({
-                                        id: id,
                                         firstName: div.querySelector('input[name="firstName"]').value,
                                         lastName: div.querySelector('input[name="lastName"]').value,
                                         ageGroup: group,
@@ -868,6 +866,22 @@ if (page) {
                     .then(data => {
                         // REDIRECT
                         if (data.redirect) {
+                            trip.bookedTripJson.paymentMethod = paymentMethod;
+
+                            // TICKET NO
+                            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                            let word = "";
+                            const ranNum = Math.floor(Math.random() * 1e13).toString().padStart(13, "0");
+
+                            for (i = 0; i < 5; i++) {
+                                word += letters[Math.floor(Math.random() * letters.length)]
+                            }
+
+                            const ticketNo = word + ranNum;
+
+                            trip.bookedTripJson.ticketNo = ticketNo;
+
+                            sessionStorage.setItem("bookedTripJson", JSON.stringify(trip));
                             window.location.href = data.redirect;
                         }
                     })
@@ -884,7 +898,88 @@ if (page) {
 
         // SUCCESS PAYMENT
         if (page.textContent.toLowerCase() === "receipt") {
-        
+            // GET TRIP DATA
+            const trip = JSON.parse(sessionStorage.getItem("bookedTripJson"));
+            console.log(trip);
+
+            // MAIN PASSENGER JSON
+            const mainPassengerJson = {
+                email: trip.bookedTripJson.user.email,
+                mobile: trip.bookedTripJson.user.mobile,
+                firstName: trip.bookedTripJson.user.firstName,
+                lastName: trip.bookedTripJson.user.lastName,
+                ageGroup: trip.bookedTripJson.user.ageGroup,
+                birthDate: new Date(trip.bookedTripJson.user.birthDate).toISOString()
+            }
+
+            console.log(mainPassengerJson);
+
+            fetch("/Home/SendMainPass", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(mainPassengerJson)
+            }).then(res => res.json())
+            .then(data => {
+                console.log(data.message);
+                let passengerId = data.passId;
+
+                // USER ID
+                let userId = passengerId; // The ID of the passenger is same as the user ID 
+                console.log(passengerId); // REMOVE THIS
+
+                 // VALIDATION FOR PASSENGER
+                const noOfPass = trip.bookedTripJson.passengerNo.adults + trip.bookedTripJson.passengerNo.children + trip.bookedTripJson.passengerNo.seniors;
+                if (noOfPass > 1) {
+                    // LOOP ALL OF THE PASSENGER
+                    const passenger = {
+                        passengerId: passengerId,
+                        passengers: trip.bookedTripJson.user.passengers
+                    }
+
+                    console.log(passenger);
+
+                    fetch("/Home/SendPassenger", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(passenger)
+                    }).then(res => res.json())
+                    .then(data => {
+                        console.log(data.message);
+                    })
+                    .catch(err => console.log(err));
+                }
+
+                // BOOKED TRIP JSON
+                const bookedTripJson = {
+                    ticketNo: trip.bookedTripJson.ticketNo,
+                    passengerNo: noOfPass,
+                    userId: userId,
+                    tripId: trip.tripId,
+                    insuranceType: trip.bookedTripJson.insuranceType,
+                    paymentMethod: trip.bookedTripJson.paymentMethod,
+                    totalPrice: trip.bookedTripJson.totalPrice
+                }
+
+                console.log(bookedTripJson); // REMOVE THIS
+
+                fetch("/Home/SendBookedTrip", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(bookedTripJson)
+                }).then(res => res.json())
+                .then(data => {
+                    console.log(data.message);
+                })
+                .catch(err => console.log(err));
+            })  
+            .catch(err => console.log(err));
+
             // SUCCESS POP UP
             popUpCon.classList.toggle("show");
             successPayPopUp = document.getElementById("successPayPopUp");

@@ -89,6 +89,12 @@ public class HomeController : Controller
     public IActionResult Receipt()
     {
         ViewBag.Title = "Receipt";
+
+        // STORE THE DATA IN THE DATABASE
+        // THIS IS APPARENTLY A BAD DESIGN BECAUSE USER CAN JUST CHANGE THE URL LINK TO RECEIPT AND IT WILL AUTOMATICALLY STORE THE DATA IN THE DTAABASE
+
+
+
         return View("Booking/Receipt");
     }
 
@@ -241,7 +247,16 @@ public class HomeController : Controller
             else
             {
                 if (gcashTable.AvailableBalance > 0)
-                {
+                {   
+                    var sendAmount = new GCashModel
+                    {
+                        AvailableBalance = gcashTable.AvailableBalance,
+                        Amount = req.Amount  
+                    };
+
+                    _context.Add(sendAmount);
+                    _context.SaveChanges();
+
                     return Ok( new { message = "GCash Balance is sufficient", redirect = Url.Action("GCashMain", "Gcash")});
                 }
                 else
@@ -285,6 +300,15 @@ public class HomeController : Controller
             {
                 if (mayaTable.AvailBalance > 0)
                 {
+                    var sendAmount = new PayMayaModel
+                    {
+                        AvailBalance = mayaTable.AvailBalance,
+                        Amount = req.Amount
+                    };
+
+                    _context.PayMaya.Add(sendAmount);
+                    _context.SaveChanges();
+
                     return Ok( new { message = "Maya Balance sufficient", redirect = Url.Action("PayMayaMain", "PayMaya")});
                 }
                 else
@@ -308,4 +332,76 @@ public class HomeController : Controller
 
         return Ok(new { message = "No Payment method chosen"});
     } 
+
+
+    [HttpPost] 
+    public IActionResult SendBookedTrip([FromBody] BookedTripRequest req)
+    {
+        var BookedTrip = new BookedTripModel
+        {
+            TicketNo = req.TicketNo,
+            UserId = req.UserId,
+            PassengerNo = req.PassengerNo,
+            TripId = req.TripId,
+            InsuranceType = req.InsuranceType,
+            PaymentMethod = req.PaymentMethod,
+            TotalPrice = req.TotalPrice
+        };
+
+        _context.BookedTrip.Add(BookedTrip);
+        _context.SaveChanges();
+
+        return Ok(new { message = "Data has been stored"});
+    }
+
+    [HttpPost]
+    public IActionResult SendMainPass([FromBody] User mainPass)
+    {
+        DateTime birthDate = DateTime.Parse(mainPass.BirthDate);
+
+        var User = new UserModel
+        {
+            Email = mainPass.Email,
+            Mobile = mainPass.Mobile,
+            FirstName = mainPass.FirstName,
+            LastName = mainPass.LastName,
+            AgeGroup = mainPass.AgeGroup,
+            BirthDate = birthDate
+        };
+
+        _context.User.Add(User);
+        _context.SaveChanges();
+
+        User.PassengersId = User.Id;
+        _context.SaveChanges();
+
+        return Ok(new { message = "Main passenger inserted", passId = User.PassengersId});
+    }
+
+    [HttpPost]
+    public IActionResult SendPassenger([FromBody] PassengerRequest passenger) 
+    {
+        
+        Console.WriteLine(passenger.PassengerId);
+        foreach (var p in passenger.Passengers)
+        {
+            DateTime birthDate = DateTime.Parse(p.BirthDate);
+
+            var Passenger = new PassengerModel
+            {
+                PassengerId = passenger.PassengerId,
+                FirstName = p.FirstName,
+                LastName = p.LastName,
+                AgeGroup = p.AgeGroup,
+                BirthDate = birthDate
+            };
+
+            _context.Passenger.Add(Passenger);
+        }
+        
+        _context.SaveChanges();   
+
+        return Ok(new { message = "Passenger Inserted"});
+    }
+
 }

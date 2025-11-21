@@ -902,6 +902,85 @@ if (page) {
             const trip = JSON.parse(sessionStorage.getItem("bookedTripJson"));
             console.log(trip);
 
+
+            // DISPLAY
+            // VARIABLE
+            const ticketNo = document.querySelectorAll(".ticketNo");
+            const destination = document.querySelectorAll(".destination");
+            const departureTime = document.querySelectorAll(".departureTime");
+            const tripNo = document.querySelectorAll(".tripNo");
+            const gate = document.querySelectorAll(".gate");
+            const bay = document.querySelectorAll(".bay");
+            const dateBooked = document.querySelectorAll(".dateBooked");
+            const totalPrice = document.querySelectorAll(".totalPrice");
+
+            ticketNo.forEach(t => {
+                t.textContent = trip.bookedTripJson.ticketNo;
+            });
+
+            destination.forEach(d => {
+                d.textContent = trip.destination;
+            });
+
+            departureTime.forEach(d => {
+                    // DISPLAY DEPARTURE
+                const date = new Date(trip.departureTime);
+                const departureTimeFormat = date.toLocaleString("en-CA", {
+                    weekday: "short",
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: true
+                });
+                d.textContent = departureTimeFormat;
+            });
+
+            tripNo.forEach(t => {
+                t.textContent = trip.tripNo;
+            });
+
+            gate.forEach(g => {
+                g.textContent = trip.gate
+            });
+
+            bay.forEach(b => {
+                b.textContent = trip.bay;
+            });
+
+            totalPrice.forEach(p => {
+                p.textContent = trip.bookedTripJson.totalPrice;
+            });
+
+            // DISPLAY PASSENGER
+            const mainPass = document.getElementById("mainPass");
+            const mainPassAgeGroup = document.getElementById("mainPassAgeGroup");
+
+            mainPass.textContent = trip.bookedTripJson.user.firstName + " " + trip.bookedTripJson.user.lastName;
+            mainPassAgeGroup.textContent = trip.bookedTripJson.user.ageGroup;
+
+            const passenger = document.getElementById("passengerList");
+            const passengerList = trip.bookedTripJson.user.passengers;
+            if (passengerList.length > 0) {
+                passenger.innerHTML = passengerList.map(p => `<li> <span>${p.firstName} ${p.lastName}</span>, <span>${p.ageGroup}</span></li>`).join("");
+            }
+
+            // PAYMENT METHOD
+            const paymentMethod = document.getElementById("paymentMethod");
+            const checkPaymentMethod = trip.bookedTripJson.paymentMethod;
+            const maya = document.getElementById("maya");
+            const gcash = document.getElementById("gcash");
+
+            if (checkPaymentMethod == "gcash") {
+                paymentMethod.textContent = "Gcash";
+                gcash.classList.remove("hide");
+            } else if (checkPaymentMethod == "maya") {
+                paymentMethod.textContent = "PayMaya"
+                maya.classList.remove("hide");
+            }
+
+            // INSERT DATA INTO DATABASE
             // MAIN PASSENGER JSON
             const mainPassengerJson = {
                 email: trip.bookedTripJson.user.email,
@@ -977,8 +1056,38 @@ if (page) {
                     console.log(data.message);
                 })
                 .catch(err => console.log(err));
+
+                // DISPLAY DATEBOOKED
+                const sendDate = {
+                    TicketNo: trip.bookedTripJson.ticketNo
+                }
+
+                fetch("/Home/GetDateBooked", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(sendDate)
+                }).then(res => res.json())
+                .then(data => {
+                    dateBooked.forEach(d => {
+                        const date = new Date(data.date);
+                        const formattedDate = date.toLocaleString("en-CA", {
+                            weekday: "short",
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            hour12: true
+                        });
+                        d.textContent = formattedDate;
+                    });
+                })
+                .catch(err => console.log(err));
             })  
             .catch(err => console.log(err));
+
 
             // SUCCESS POP UP
             popUpCon.classList.toggle("show");

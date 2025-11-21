@@ -1817,7 +1817,15 @@ input[type="radio"] {
 }
 
 .receipt_main_con_top span {
-  font-weight: var(--semibold) !important;
+  font-weight: var(--semibold);
+}
+
+.ticketNo {
+  font-weight: var(--regular) !important;
+}
+
+.ticketNo.popUpReceipt {
+  color: var(--main-color-blue) !important; 
 }
 
 .receipt_head {
@@ -2066,6 +2074,10 @@ footer {
   padding-left: 50px;
 }
 
+#passengerList {
+  padding: 0px !important;
+}
+
 .receipt_popUp_trip_info_con {
   display: flex;
   flex-direction: column;
@@ -2106,6 +2118,11 @@ footer {
   color: var(--black);
 }
 
+#desPopUpReceipt {
+  font-weight: var(--regular) !important;
+  color: var(--grey);
+}
+
 .receipt_popUp_pay_method_con {
   display: flex;
   align-items: center;
@@ -2121,6 +2138,10 @@ footer {
   display: flex;
   align-self: flex-end;
   width: 65px;
+}
+
+.receipt_popUp_payment_logo.gcash {
+  align-self: center;
 }
 
 /* BUS PIC */

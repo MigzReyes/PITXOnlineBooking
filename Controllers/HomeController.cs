@@ -90,11 +90,6 @@ public class HomeController : Controller
     {
         ViewBag.Title = "Receipt";
 
-        // STORE THE DATA IN THE DATABASE
-        // THIS IS APPARENTLY A BAD DESIGN BECAUSE USER CAN JUST CHANGE THE URL LINK TO RECEIPT AND IT WILL AUTOMATICALLY STORE THE DATA IN THE DTAABASE
-
-
-
         return View("Booking/Receipt");
     }
 
@@ -404,4 +399,12 @@ public class HomeController : Controller
         return Ok(new { message = "Passenger Inserted"});
     }
 
+    [HttpPost]
+    public IActionResult GetDateBooked([FromBody] DateBookedRequest req)
+    {   
+
+        var dateBooked = _context.BookedTrip.Where(t => t.TicketNo == req.TicketNo).Select(d => d.DateBooked).FirstOrDefault();
+
+        return Ok(new { message = "Send Booked Date", date = dateBooked });
+    }
 }

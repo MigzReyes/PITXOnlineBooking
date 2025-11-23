@@ -233,11 +233,18 @@ if (destinationInput) {
         datePicked = date.toLocaleDateString("en-CA");
 
         const errorBookingBus = document.querySelector(".error_booking_bus");
+        const bookingBusList = document.querySelectorAll(".booking_bus_trip_list");
         console.log("date picked: ", datePicked, " today: ", today);
-        if (datePicked == today) {
-            errorBookingBus.classList.add("show");
-        } else {
+        if (datePicked !== today) {
             errorBookingBus.classList.remove("show");
+            bookingBusList.forEach(b => {
+                b.classList.remove("hide");
+            });
+        } else {
+            errorBookingBus.classList.add("show");
+            bookingBusList.forEach(b => {
+                b.classList.add("hide");
+            });
         }
 
         // METHOD POST TO BACK-END AND UPDATE THE LIST BASED ON THE DATE

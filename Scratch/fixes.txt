@@ -1,0 +1,8 @@
+
+The booking system still contain todays trip
+
+    Current solution: display: none for both bus list
+
+    Proper solution: Find a way to properly removed all of the current day trips
+
+    NOTE!!! The bus trips are all automated, so this means in the near future it is possible to remove the automated bus trip and just implement an admin system...
